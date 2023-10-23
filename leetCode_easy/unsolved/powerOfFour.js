@@ -20,7 +20,7 @@ Output: true
 
 Constraints:
 
--231 <= n <= 231 - 1
+-2^31 <= n <= 2^31 - 1
 
 
 Follow up: Could you solve it without loops/recursion?
@@ -39,7 +39,7 @@ Follow up: Could you solve it without loops/recursion?
 // IF x is an int
     // return true
 // return false
-var isPowerOfFour = function(n) {
+var _isPowerOfFour = function(n) {
     if (n === 0) {
         return false;
     }
@@ -57,9 +57,35 @@ var isPowerOfFour = function(n) {
 
 // console.log((-2147483648)**(1/4)); // -> imaginary number
 // console.log(isPowerOfFour(-2147483648)) // false;
-console.log(isPowerOfFour(16)) // true
-console.log(isPowerOfFour(0)) // false
-console.log(isPowerOfFour(4)) // true
+// console.log(isPowerOfFour(16)) // true
+// console.log(isPowerOfFour(0)) // false
+// console.log(isPowerOfFour(4)) // true
 // t = 54ms, mem = 43.43MB | 83.53%, 53.82%
 
+// console.log(35%10);
 // Should try with recursion
+
+// basecase = if n === 1 || n === 0
+    // return true
+// else IF you can't divide n by 4 and get a whole number
+    // return false
+var isPowerOfFour = function(n) {
+    if (n === 1) {
+        return true;
+    } else if (n < 4 && ((n*10) % 10 === 0)) {
+        return false;
+    }
+    let quo = n/4;
+    return isPowerOfFour(quo);
+};
+
+// console.log(isPowerOfFour(16)) // true
+console.log(isPowerOfFour(0)) // false
+console.log(isPowerOfFour(4)) // true
+console.log(isPowerOfFour(4194304)) // true
+console.log(isPowerOfFour(64)) // true
+console.log(isPowerOfFour(1073741824)) // true
+console.log(isPowerOfFour(1073741823)) // false
+
+// t = 72ms, mem = 45.78MB | 7.76%, 6.02%
+// I would expect this to be worse on all fron't because you dont have recurision.
