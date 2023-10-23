@@ -69,7 +69,7 @@ var _isPowerOfFour = function(n) {
     // return true
 // else IF you can't divide n by 4 and get a whole number
     // return false
-var isPowerOfFour = function(n) {
+var __isPowerOfFour = function(n) {
     if (n === 1) {
         return true;
     } else if (n < 4 && ((n*10) % 10 === 0)) {
@@ -80,12 +80,28 @@ var isPowerOfFour = function(n) {
 };
 
 // console.log(isPowerOfFour(16)) // true
-console.log(isPowerOfFour(0)) // false
-console.log(isPowerOfFour(4)) // true
-console.log(isPowerOfFour(4194304)) // true
-console.log(isPowerOfFour(64)) // true
-console.log(isPowerOfFour(1073741824)) // true
-console.log(isPowerOfFour(1073741823)) // false
 
 // t = 72ms, mem = 45.78MB | 7.76%, 6.02%
 // I would expect this to be worse on all fron't because you dont have recurision.
+
+var isPowerOfFour = function(n) {
+    for (let i = 0; n >= 1; i++) {
+        // console.log(n);
+        if (n === 1) {
+            return true;
+        }
+        if (n < 4 && ((n*10) % 10 === 0)) {
+            return false;
+        }
+        n/=4;
+    }
+    return false;
+};
+// console.log(isPowerOfFour(0)) // false
+// console.log(isPowerOfFour(4)) // true
+console.log(isPowerOfFour(4194304)) // true
+// console.log(isPowerOfFour(64)) // true
+// console.log(isPowerOfFour(1073741824)) // true
+console.log(isPowerOfFour(1073741823)) // false
+
+// t = 67ms, mem = 43.28MB | 20.48%, 68.67%
