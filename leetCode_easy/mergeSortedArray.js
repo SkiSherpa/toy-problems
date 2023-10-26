@@ -47,10 +47,42 @@ Follow up: Can you come up with an algorithm that runs in O(m + n) time?
  * @param {number} n
  * @return {void} Do not return anything, modify nums1 in-place instead.
  */
-var merge = function(nums1, m, nums2, n) {
+// IP: array1(nums1) and number 1, and another array2(nums2) and its number 2
+// OP: a merged sorted nums1 array
+// C: have to return nums1 but is merged with the numbers from nums2
 
+// loop through nums2
+    // set current value of nums2
+    // loop through nums1, only need to go up to m
+        // is the current val of num2 <= current of nums1
+        // 2 <= 1?
+        // 2 <= 2
+        // splice in current val of nums2
+        // remove the last zero
+// return nums1
+
+var merge = function(nums1, m, nums2, n) {
+    for (let j = 0; j < n; j++) {
+        let cur2 = nums2[j];
+        for (let i = 0; i < m+n; i++) {
+            let cur1 = nums1[i];
+            if (cur2 <= cur1) {
+                nums1.splice(i, 0, cur2);
+                nums1.pop();
+                break;
+            }
+            if (cur1 === 0 && i > m) {
+                nums1.splice(i, 0, cur2);
+                nums1.pop();
+                break;
+            }
+        }
+    }
+    return nums1;
 };
 
-console.log(merge([1,2,3,0,0,0], 3, [2,5,6], 3)); // [1,2,2,3,5,6]
+// console.log(merge([1,2,3,0,0,0], 3, [2,5,6], 3)); // [1,2,2,3,5,6]
+// console.log(merge([1,1,2,3,0,0,0], 4, [2,5,6], 3)); // [1,1,2,2,3,5,6]
 console.log(merge([1], 1, [], 0)); // [1]
 console.log(merge([0], 0, [1], 1)); // [1]
+console.log(merge([-1,0,0,3,3,3,0,0,0], 6, [1,2,2], 3)) // [-1,0,0,1,2,2,3,3,3]
