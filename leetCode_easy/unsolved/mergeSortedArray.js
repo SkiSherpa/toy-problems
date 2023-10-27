@@ -84,7 +84,7 @@ Follow up: Can you come up with an algorithm that runs in O(m + n) time?
 //     }
 // }
 // return nums1;
-var merge = function(nums1, m, nums2, n) {
+var _merge = function(nums1, m, nums2, n) {
     let i = 0;
     let j = 0;
     let leftInNums2 = n;
@@ -137,12 +137,39 @@ var merge = function(nums1, m, nums2, n) {
     return nums1;
 };
 
-// pointer for i and j
-// subtracting from n after each number from nums2 is added to nums1
+// chop off trailing zeros from nums1
+// add each num from nums2
+// use .sort on nums1
+var merge = function(nums1, m, nums2, n) {
+    let nums2Len = nums2.length;
+    let nums1Len = nums1.length;
 
-console.log(merge([1,2,3,0,0,0], 3, [2,5,6], 3)); // [1,2,2,3,5,6]
+    if (nums2Len === 0) {
+        return nums1;
+    }
+
+    if (m === 0 & n === 1) {
+        nums1[0] = nums2[0];
+        return nums1;
+    }
+
+    if (m === 0 &&  nums1Len > 0) {
+        nums1 = [];
+    } else {
+        let i = nums1.length - m;
+        nums1.splice(i, m);
+    }
+    for (let j = 0; j < nums2Len; j++) {
+        nums1.push(nums2[j]);
+    }
+    nums1.sort();
+    return nums1;
+}
+
+// console.log(merge([1,2,3,0,0,0], 3, [2,5,6], 3)); // [1,2,2,3,5,6]
 // console.log(merge([1,1,2,3,0,0,0], 4, [2,5,6], 3)); // [1,1,2,2,3,5,6]
 // console.log(merge([1], 1, [], 0)); // [1]
-console.log(merge([0], 0, [1], 1)); // [1]
+// console.log(merge([0], 0, [1], 1)); // [1]
 // console.log(merge([-1,0,0,3,3,3,0,0,0], 6, [1,2,2], 3)) // [-1,0,0,1,2,2,3,3,3]
-console.log(merge([1,0], 1, [2], 1)); // [1,2]
+// console.log(merge([1,0], 1, [2], 1)); // [1,2]
+// console.log(merge([0,0,0,0,0], 0, [1,2,3,4,5], 5)) // [1,2,3,4,5]
