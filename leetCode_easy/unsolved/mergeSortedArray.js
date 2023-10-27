@@ -61,28 +61,88 @@ Follow up: Can you come up with an algorithm that runs in O(m + n) time?
         // remove the last zero
 // return nums1
 
+// if (m === 0 & n === 1) {
+//     nums1[0] = nums2[0];
+// }
+// console.log(nums1, nums2);
+// for (let j = 0; j < n; j++) {
+//     let cur2 = nums2[j];
+//     for (let i = 0; i < m+n; i++) {
+//         let cur1 = nums1[i];
+//         console.log(cur2,"<=", cur1)
+//         if (cur2 <= cur1) {
+//             // console.log("hit");
+//             nums1.splice(i, 0, cur2);
+//             nums1.pop();
+//             break;
+//         }
+//         if (cur1 === 0 && i > m) {
+//             nums1.splice(i, 0, cur2);
+//             nums1.pop();
+//             break;
+//         }
+//     }
+// }
+// return nums1;
 var merge = function(nums1, m, nums2, n) {
-    for (let j = 0; j < n; j++) {
-        let cur2 = nums2[j];
-        for (let i = 0; i < m+n; i++) {
+    let i = 0;
+    let j = 0;
+    let leftInNums2 = n;
+    while (leftInNums2 > 0) {
+        // loop through nums1
+        // IF num1[i] < num2[j]
+            // splice in num2[j] at i
+            // remove a trailing zero
+            // increase j by one
+            // break
+        // otherwise, IF num1[i] > num2[i]
+            // IF (i === 0)
+                // add to the front of nums1
+                // remove a trailing zero
+                // increase j by one
+                // break
+            // otherwise,
+            // splice in num2[j] at i - 1
+            // remove a trailing zero
+            // increase j by one
+            // break
+        // set i = 0;
+        while (i < m+n) {
             let cur1 = nums1[i];
-            if (cur2 <= cur1) {
+            let cur2 = nums2[j];
+            if (cur1 < cur2) {
+                nums1.splice(i+1, 0, cur2);
+                nums1.pop();
+                j++;
+                leftInNums2--;
+                break;
+            } else if (cur1 > cur2) {
+                if (i === 0) {
+                    nums1.unshift(cur2);
+                    nums1.pop();
+                    j++;
+                    leftInNums2--;
+                    break;
+                }
                 nums1.splice(i, 0, cur2);
                 nums1.pop();
+                j++;
+                leftInNums2--;
                 break;
             }
-            if (cur1 === 0 && i > m) {
-                nums1.splice(i, 0, cur2);
-                nums1.pop();
-                break;
-            }
+            i++;
         }
+        i = 0;
     }
     return nums1;
 };
 
-// console.log(merge([1,2,3,0,0,0], 3, [2,5,6], 3)); // [1,2,2,3,5,6]
+// pointer for i and j
+// subtracting from n after each number from nums2 is added to nums1
+
+console.log(merge([1,2,3,0,0,0], 3, [2,5,6], 3)); // [1,2,2,3,5,6]
 // console.log(merge([1,1,2,3,0,0,0], 4, [2,5,6], 3)); // [1,1,2,2,3,5,6]
-console.log(merge([1], 1, [], 0)); // [1]
+// console.log(merge([1], 1, [], 0)); // [1]
 console.log(merge([0], 0, [1], 1)); // [1]
-console.log(merge([-1,0,0,3,3,3,0,0,0], 6, [1,2,2], 3)) // [-1,0,0,1,2,2,3,3,3]
+// console.log(merge([-1,0,0,3,3,3,0,0,0], 6, [1,2,2], 3)) // [-1,0,0,1,2,2,3,3,3]
+console.log(merge([1,0], 1, [2], 1)); // [1,2]
