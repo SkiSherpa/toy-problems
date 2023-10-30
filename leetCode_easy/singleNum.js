@@ -3,8 +3,6 @@ Given a non-empty array of integers nums, every element appears twice except for
 
 You must implement a solution with a linear runtime complexity and use only constant extra space.
 
-
-
 Example 1:
 
 Input: nums = [2,2,1]
@@ -29,10 +27,55 @@ Each element in the array appears twice except for one element which appears onl
  * @param {number[]} nums
  * @return {number}
  */
-var singleNumber = function(nums) {
+// IP: array of numbers
+// OP: a number - the number that appears once
+// C: only int, "nums" will always have one number in it
 
+// {the number: count}
+
+// loop through the list
+    // IF indexOf(current val, i) === -1
+        // return current val
+
+var singleNumber = function(nums) {
+    if (nums.length === 1) {
+        return nums[0];
+    }
+    let length = nums.length;
+
+    for (let i = 0; i < length; i++) {
+        // IF a pair is found
+            // delete current val and found pair
+            // reset i, i--
+        let cur = nums[i];
+        let iOfPair = nums.indexOf(nums[i], i+1);
+        if (iOfPair === -1) {
+            return cur;
+        }
+        nums.splice(i, 1);
+        nums.splice(iOfPair-1, 1);
+        i--;
+    }
 };
 
-console.log(singleNumber([2,2,1])) // 1
-console.log(singleNumber([4,1,2,1,2])) // 4
-console.log(singleNumber([1])) // 1
+// console.log(singleNumber([2,2,1])) // 1
+// console.log(singleNumber([4,1,2,1,2])) // 4
+// console.log(singleNumber([1])) // 1
+console.log(singleNumber([1,4,2,1,2])) // 4
+
+// t = 221ms | mem = 46.62MB ; 12.13% | 30.65%
+
+// Someone elses Sol:
+var singleNumber = function (nums) {
+    let arr = nums.sort((a, b) => a - b); // Create a copy of the array and sort it
+
+    for (let i = 0; i <= nums.length - 1; i += 2) { // Iterate by 2
+      if (arr[i] !== arr[i + 1]) {
+        return arr[i];
+      }
+    }
+
+    return arr[arr.length - 1];  // Return the first non-matching pair
+  };
+
+//   60ms | 44.62MB; 61.18% | 59.83%
