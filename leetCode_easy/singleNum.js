@@ -61,21 +61,25 @@ var singleNumber = function(nums) {
 // console.log(singleNumber([2,2,1])) // 1
 // console.log(singleNumber([4,1,2,1,2])) // 4
 // console.log(singleNumber([1])) // 1
-console.log(singleNumber([1,4,2,1,2])) // 4
 
 // t = 221ms | mem = 46.62MB ; 12.13% | 30.65%
 
 // Someone elses Sol:
 var singleNumber = function (nums) {
     let arr = nums.sort((a, b) => a - b); // Create a copy of the array and sort it
-
+    console.log(arr);
     for (let i = 0; i <= nums.length - 1; i += 2) { // Iterate by 2
-      if (arr[i] !== arr[i + 1]) {
-        return arr[i];
-      }
+        if (arr[i] !== arr[i + 1]) {
+            return arr[i];
+        }
     }
 
     return arr[arr.length - 1];  // Return the first non-matching pair
-  };
+};
 
 //   60ms | 44.62MB; 61.18% | 59.83%
+// console.log(singleNumber([1,4,2,1,2])) // 4
+let arr = [1,2,3];
+console.log(arr, arr.length);
+delete arr[0];
+console.log(arr, arr.length);
