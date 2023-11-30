@@ -35,7 +35,7 @@ let validPairs = function (s) {
     console.log('made it to the end, stack legnth: ', stack.length)
     return !stack.length;
 }
-
+// The ( c === ')' && stack[stack.length - 1] !== '(' ), is b/c there are other brakets in the problem that are not here.
 // console.log(validPairs('()')); // true
 // console.log(validPairs('(())')); // true
 // console.log(validPairs('(()')); // false
