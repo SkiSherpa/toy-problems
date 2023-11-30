@@ -32,6 +32,16 @@ s consists of parentheses only '()[]{}'.
  * @param {string} s
  * @return {boolean}
  */
+// IP: a str
+// OP: a bool - true if correct order of parenths
+// C: must have closing parenths
+// assume you could have something nested like: ([])
+// assume only valid entries
 var isValid = function(s) {
 
 };
+
+console.log(isValid("()")); // true
+console.log(isValid("([])")); // true
+console.log(isValid("(]")); // false
+console.log(isValid("()[]{}"))
