@@ -37,11 +37,50 @@ s consists of parentheses only '()[]{}'.
 // C: must have closing parenths
 // assume you could have something nested like: ([])
 // assume only valid entries
-var isValid = function(s) {
 
+// create flag vars for regular parenth, brackets, and squiggles set to true
+// Loop through string
+    // IF current char is (, [, or {
+        // set corrisponding flag to false
+    // IF reg, bra, squig are false && current char is a closing reg, bra, squig
+        // set corrisponding flag to true
+// IF all flags are true
+    // return true
+// return false
+var isValid = function(s) {
+    let reg = true;
+    let bra = true;
+    let squig = true;
+    for (let i = 0; i < s.length; i++) {
+        let cur = s[i];
+        if (cur === '(') {
+
+            reg = !reg;
+        }
+        if (cur === '[') {
+            bra = !bra;
+        }
+        if (cur === '{') {
+            squig = !squig;
+        }
+        if (!reg && cur === ')') {
+            reg = !reg;
+        }
+        if (!bra && cur === ']') {
+            bra = !bra;
+        }
+        if (!squig && cur === '}') {
+            squig = !squig;
+        }
+    }
+    if (reg && bra && squig) {
+        return true;
+    }
+    return false;
 };
 
-console.log(isValid("()")); // true
-console.log(isValid("([])")); // true
-console.log(isValid("(]")); // false
-console.log(isValid("()[]{}"))
+// console.log(isValid("()")); // true
+// console.log(isValid("([])")); // true
+// console.log(isValid("(]")); // false
+// console.log(isValid("()[]{}")) // true
+console.log(isValid("([)]")); // false
