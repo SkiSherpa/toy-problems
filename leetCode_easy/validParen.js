@@ -35,56 +35,36 @@ s consists of parentheses only '()[]{}'.
 // IP: a str
 // OP: a bool - true if correct order of parenths
 // C: must have closing parenths
-// you can NOT have something nested like: ([])
 // assume only valid entries
-
-// create flag vars for regular parenth, brackets, and squiggles set to true
-// Loop through string
-    // IF current char is (, [, or {
-        // set corrisponding flag to false
-    // IF reg, bra, squig are false && current char is a closing reg, bra, squig
-        // set corrisponding flag to true
-// IF all flags are true
-    // return true
-// return false
-
 // YOU CANT HAVE NESTED PARENTH, LIKE ({[]})
-// didn't know, have to rewrite logic.
+
+// As soon as one opens, it has to close
+// loop through s, start at 1, go up by 2
+    // if the current is ) && prev = (
+        // continue
+    // otherwise, return false
+
 var isValid = function(s) {
-    if (s.length === 1) {
+    if (s.length === 1 || s.length % 2 === 1) {
         return false;
     }
-    let reg = true;
-    let bra = true;
-    let squig = true;
-    for (let i = 0; i < s.length; i++) {
-        let cur = s[i];
-        if (cur === '(') {
-            reg = !reg;
-        }
-        if (cur === '[') {
-            bra = !bra;
-        }
-        if (cur === '{') {
-            squig = !squig;
-        }
-        if (!reg && cur === ')') {
-            reg = !reg;
-        }
-        if (!bra && cur === ']') {
-            bra = !bra;
-        }
-        if (!squig && cur === '}') {
-            squig = !squig;
+
+    for (let i = 1; i < s.length; i+=2) {
+        if (s[i] === ')' && s[i-1] === '(') {
+            continue;
+        } else if (s[i] === ']' && s[i-1] === '[') {
+            continue;
+        } else if (s[i] === '}' && s[i-1] === '{') {
+            continue;
+        } else {
+            return false;
         }
     }
-    if (reg && bra && squig) {
-        return true;
-    }
-    return false;
+    return true;
 };
 
 // console.log(isValid("()")); // true
+// console.log(isValid("()[]")); // true
 // console.log(isValid("([])")); // false
 // console.log(isValid("(]")); // false
 // console.log(isValid("()[]{}")) // true
