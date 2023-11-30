@@ -83,4 +83,5 @@ var isValid = function(s) {
 // console.log(isValid("([])")); // true
 // console.log(isValid("(]")); // false
 // console.log(isValid("()[]{}")) // true
+// test case 63:
 console.log(isValid("([)]")); // false
