@@ -35,7 +35,7 @@ s consists of parentheses only '()[]{}'.
 // IP: a str
 // OP: a bool - true if correct order of parenths
 // C: must have closing parenths
-// assume you could have something nested like: ([])
+// you can NOT have something nested like: ([])
 // assume only valid entries
 
 // create flag vars for regular parenth, brackets, and squiggles set to true
@@ -47,6 +47,9 @@ s consists of parentheses only '()[]{}'.
 // IF all flags are true
     // return true
 // return false
+
+// YOU CANT HAVE NESTED PARENTH, LIKE ({[]})
+// didn't know, have to rewrite logic.
 var isValid = function(s) {
     if (s.length === 1) {
         return false;
@@ -82,7 +85,7 @@ var isValid = function(s) {
 };
 
 // console.log(isValid("()")); // true
-// console.log(isValid("([])")); // true
+// console.log(isValid("([])")); // false
 // console.log(isValid("(]")); // false
 // console.log(isValid("()[]{}")) // true
 // test case 63:
