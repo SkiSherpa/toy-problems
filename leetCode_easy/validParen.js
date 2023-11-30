@@ -36,7 +36,7 @@ s consists of parentheses only '()[]{}'.
 // OP: a bool - true if correct order of parenths
 // C: must have closing parenths
 // assume only valid entries
-// YOU CANT HAVE NESTED PARENTH, LIKE ({[]})
+// YOU CANT HAVE NESTED PARENTH, LIKE ({[]}) - you can have this...
 
 // As soon as one opens, it has to close
 // loop through s, start at 1, go up by 2
@@ -44,8 +44,8 @@ s consists of parentheses only '()[]{}'.
         // continue
     // otherwise, return false
 
-var isValid = function(s) {
-    if (s.length === 1 || s.length % 2 === 1) {
+var _isValid = function(s) {
+    if (s.length % 2 === 1) {
         return false;
     }
 
@@ -62,13 +62,39 @@ var isValid = function(s) {
     }
     return true;
 };
+// Someone solved it using a stack:
+var isValid = function(s) {
+    let stack = []; // create an empty stack to store opening brackets
+    for (let c of s) { // loop through each character in the string
+        console.log("begin, stack: ", stack);
+        if (c === '(' || c === '{' || c === '[') { // if the character is an opening bracket
+            console.log("push happened");
+            stack.push(c); // push it onto the stack
+        } else { // if the character is a closing bracket
+            if (!stack.length || // if the stack is empty or
+                (c === ')' && stack[stack.length - 1] !== '(') || // the closing bracket doesn't match the corresponding opening bracket at the top of the stack
+                (c === '}' && stack[stack.length - 1] !== '{') ||
+                (c === ']' && stack[stack.length - 1] !== '[')) {
+                return false; // the string is not valid, so return false
+            }
+            console.log("will pop, stack: ", stack);
+            stack.pop(); // otherwise, pop the opening bracket from the stack
+            console.log("after pop, stack: ", stack);
+        }
+        console.log("end of iteration: ", stack);
+    }
+    // IF the stack is zero, which is falsy, return the bang
+    return !stack.length; // if the stack is empty, all opening brackets have been matched with their corresponding closing brackets,
+                          // so the string is valid, otherwise, there are unmatched opening brackets, so return false
+};
 
 // console.log(isValid("()")); // true
 // console.log(isValid("()[]")); // true
-// console.log(isValid("([])")); // false
+// console.log(isValid("([])")); // true
 // console.log(isValid("(]")); // false
 // console.log(isValid("()[]{}")) // true
-// test case 63:
-console.log(isValid("([)]")); // false
-console.log(isValid("((")); // false
-console.log(isValid("(")); // false
+// test case 76:
+// console.log(isValid("([)]")); // false
+// console.log(isValid("((")); // false
+// console.log(isValid("(")); // false
+console.log(isValid("(({}[]){})")); // true
