@@ -48,13 +48,15 @@ s consists of parentheses only '()[]{}'.
     // return true
 // return false
 var isValid = function(s) {
+    if (s.length === 1) {
+        return false;
+    }
     let reg = true;
     let bra = true;
     let squig = true;
     for (let i = 0; i < s.length; i++) {
         let cur = s[i];
         if (cur === '(') {
-
             reg = !reg;
         }
         if (cur === '[') {
@@ -85,3 +87,5 @@ var isValid = function(s) {
 // console.log(isValid("()[]{}")) // true
 // test case 63:
 console.log(isValid("([)]")); // false
+console.log(isValid("((")); // false
+console.log(isValid("(")); // false
