@@ -14,9 +14,9 @@ function selectionSort(arr) {
       let lowest = i
       for (let j = i + 1; j < arr.length; j++) {
         if (arr[j] < arr[lowest]) {
-            console.log("IF trigger lowest ", lowest);
+          console.log("IF trigger lowest ", lowest, arr);
           lowest = j
-          console.log("new lowest: ", lowest);
+          console.log("new lowest: ", lowest, arr);
         }
       }
       if (lowest !== i) {
