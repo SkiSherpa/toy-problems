@@ -15,7 +15,7 @@ function mergeSort(arr) {
 
     // Merge the two sorted halves
     console.log(arr, left, right);
-    return merge(left, right);
+    return merge(left, right); // [1,3,5] , [2, 4, 6]
   }
 
   function merge(left, right) {
@@ -32,15 +32,19 @@ function mergeSort(arr) {
         j++;
       }
     }
-    console.log('helper, merged: ', merged);
-    // Add any remaining elements from the left or right arrays
-    merged.push(...left.slice(i));
+    console.log('helper, merged: ', merged, "left:", left, i);
+    // using the spread syntax (...) to push all elements
+    // from the left array starting from index i to the
+    // merged array
+    merged.push(...left.slice(i)); //
+    // ... takes [3] and the push [5] -> [3, 5] instead of [3. [5]]
+    console.log('helpeRRRR, merged: ', merged, "right:", right, j);
     merged.push(...right.slice(j));
     console.log('helper, pushed: ', merged);
     return merged;
   }
 
-console.log(mergeSort([5, 3, 1, 4]));
+console.log(mergeSort([5, 3, 1, 2, 6, 4]));
 
 //t = O(nlog(n)), n is the length of the array
 //mem = O(n), n is the length of the array
