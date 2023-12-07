@@ -3,23 +3,25 @@ function quickSort(arr) {
       return arr;
     }
 
-    const pivot = arr[Math.floor(arr.length / 2)];
-    const left = [];
-    const right = [];
+    const pivot = arr[0];
+    let left = [];
+    let right = [];
 
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i] < pivot) {
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] < pivot) {
         left.push(arr[i]);
-      } else if (arr[i] > pivot) {
+        } else {
         right.push(arr[i]);
-      }
+        }
     }
-
-    return quickSort(left).concat(pivot, quickSort(right));
+    console.log(left, right);
+    return [...quickSort(left), pivot, ...quickSort(right)];
   }
 
   // Example usage:
   const unsortedArray = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
   const sortedArray = quickSort(unsortedArray);
-
-  console.log(sortedArray);
+  console.log(unsortedArray.length, sortedArray.length)
+  console.log(unsortedArray, sortedArray);
+// const testArr = [3, 1, 4, 1, 2, 2];
+// console.log(quickSort(testArr));
