@@ -17,11 +17,12 @@ function heapSort(arr) {
 
 function buildMaxHeap(arr) {
     const n = arr.length;
-
+    console.log("build 1:", arr);
     // Build max heap from the bottom up
     for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
         heapify(arr, i, n);
     }
+    console.log("build 2: ", arr);
 }
 
 function heapify(arr, i, heapSize) {
@@ -55,5 +56,7 @@ function swap(arr, i, j) {
 // Example usage:
 const arrayToSort = [12, 4, 5, 6, 7, 3, 1, 15];
 const sortedArray = heapSort(arrayToSort.slice());
-console.log("Original Array:", arrayToSort);
+// console.log("Original Array:", arrayToSort);
 console.log("Sorted Array:", sortedArray);
+// const test = buildMaxHeap(sortedArray);
+// console.log("test ", test);
