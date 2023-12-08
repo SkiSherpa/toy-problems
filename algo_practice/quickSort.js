@@ -2,16 +2,16 @@ function quickSort(arr) {
     if (arr.length <= 1) {
       return arr;
     }
-
-    const pivot = arr[0];
+    const len = arr.length - 1;
+    const pivot = arr[len];
     let left = [];
     let right = [];
 
-    for (let i = 1; i < arr.length; i++) {
+    for (let i = len - 1; i >= 0; i--) {
         if (arr[i] < pivot) {
-        left.push(arr[i]);
+            left.push(arr[i]);
         } else {
-        right.push(arr[i]);
+            right.push(arr[i]);
         }
     }
     console.log(left, right);
