@@ -13,6 +13,7 @@ function quickSelect(arr, k, left = 0, right = arr.length - 1) {
 
     // Partition the array and get the pivot index
     const pivotIndex = partition(arr, left, right);
+    console.log("picot in quickSelect: ", pivotIndex);
 
     // If the pivot is at the k-th position, we found our element
     if (k === pivotIndex) {
@@ -29,10 +30,9 @@ function quickSelect(arr, k, left = 0, right = arr.length - 1) {
   function partition(arr, left, right) {
     // Choose the rightmost element as the pivot
     const pivot = arr[right];
-
     // Initialize the partition index
     let i = left - 1;
-
+    console.log("in partition ", "left: ", left, "right: ", right);
     // Iterate through the array and move elements smaller than the pivot to the left
     for (let j = left; j < right; j++) {
       if (arr[j] <= pivot) {
@@ -43,8 +43,8 @@ function quickSelect(arr, k, left = 0, right = arr.length - 1) {
 
     // Move the pivot to its final position
     swap(arr, i + 1, right);
-
     // Return the final position of the pivot
+
     return i + 1;
   }
 
