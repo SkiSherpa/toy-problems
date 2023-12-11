@@ -42,8 +42,8 @@ class Graph {
         A -- B
         |    |
         C    D
-            |
-            E
+             |
+             E
   */
 
   console.log('DFS traversal starting from node A:');
