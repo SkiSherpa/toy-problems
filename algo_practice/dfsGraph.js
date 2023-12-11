@@ -12,15 +12,25 @@ class Graph {
       this.adjList.get(neighbor).push(vertex); // for an undirected graph
     }
 
-    dfs(startingNode, visited = new Set(), callback) {
+
+    dfs(startingNode, targetNode, visited = new Set(), callback = () => {}) {
       visited.add(startingNode);
       callback(startingNode);
 
+      if (startingNode === targetNode) {
+        console.log(`Node ${targetNode} found!`);
+        return true; // Indicate that the target node is found
+      }
+
       for (const neighbor of this.adjList.get(startingNode)) {
         if (!visited.has(neighbor)) {
-          this.dfs(neighbor, visited, callback);
+          if (this.dfs(neighbor, targetNode, visited, callback)) {
+            return true; // Stop the traversal if the target node is found
+          }
         }
       }
+
+      return false; // Return false if the target node is not found in this branch
     }
   }
 
@@ -47,4 +57,4 @@ class Graph {
   */
 
   console.log('DFS traversal starting from node A:');
-  graph.dfs('A', new Set(), (node) => console.log(node));
+  graph.dfs('A', 'D', new Set(), (node) => console.log(node));
