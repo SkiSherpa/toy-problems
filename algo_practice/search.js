@@ -8,3 +8,6 @@ function linearSearch(arr, target) {
   }
   const array = [2, 4, 6, 8, 10];
   const targetValue = 6;
+
+//   t = O(n), n is the length of the array,
+//  Mem = O(1), you just need to hold the current index in the loop
