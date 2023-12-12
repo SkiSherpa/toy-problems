@@ -34,7 +34,6 @@ class Graph {
             }
           }
         }
-
         console.log(`Node ${targetNode} not found in the graph.`);
       }
   }
