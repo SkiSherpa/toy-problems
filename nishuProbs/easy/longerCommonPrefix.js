@@ -41,16 +41,21 @@ strs[i] consists of only lowercase English letters.
     // push curChar to "longest"
     // j++
 // return longest
-var longestCommonPrefix = function(strs) {
+var _longestCommonPrefix = function(strs) {
     let longest = "";
     let j = 0;
     let curCharToMatch;
-
-    if (strs.length === 1) {
+    let strsLen = strs.length;
+    if (strsLen === 1) {
         return strs[0];
     }
 
-    for (let i = 0; i < strs.length; i++) {
+
+
+    for (let i = 0; i < strsLen; i++) {
+        if (i === 0 && strs[0]== "") {
+            return longest;
+        }
         if (i === 0) {
             curCharToMatch = strs[i][j];
             continue;
@@ -58,8 +63,8 @@ var longestCommonPrefix = function(strs) {
         if (curCharToMatch !== strs[i][j]) {
             return longest;
         }
-        if (i === strs.length - 1) {
-            longest += curCharToMatch;
+        if (i === strsLen - 1) {
+            longest.concat(curCharToMatch);
             j++;
             i = -1;
         }
@@ -67,6 +72,35 @@ var longestCommonPrefix = function(strs) {
     return longest;
 };
 
+// Someone sol: t = 61ms | m = 41.87MB
+// To me it looks like it only compares the first and last words and their chars,,
+// but it does compare every one why? - ANS, its the sort(),
+// it makes the first and last most likely to be different
+
+var longestCommonPrefix = function(strs) {
+    // sort the array because its rearrange alphabetical order
+    strs.sort(); // nlog(n)
+
+    for (let i = 0; i < strs[0].length; i++) {
+        if (strs[0][i] !== strs[strs.length - 1][i]){
+            return strs[0].substr(0, i);
+        }
+    }
+
+  return strs[0];
+};
+
+
 // console.log(longestCommonPrefix(["dog","racecar","car"])); // ""
 // console.log(longestCommonPrefix(["flower","flow","flight"])); // "fl"
-console.log(longestCommonPrefix(["f"])); // f
+// console.log(longestCommonPrefix(["f"])); // f
+// console.log(longestCommonPrefix(["", ""])); // ""
+// this takes too much mem:
+// console.log(longestCommonPrefix(["flower", "flower","flower","flower"])); // flower
+console.log(longestCommonPrefix(["flower","flow","fight", "flack", "floom"])); // ""
+
+// Big O:
+// t = nlog(n), n is the length of the strs array
+// t = m, where m is the length of the longest common prefix
+// t = nlog(n)
+// m = O(1), just holding i.
