@@ -46,6 +46,10 @@ var longestCommonPrefix = function(strs) {
     let j = 0;
     let curCharToMatch;
 
+    if (strs.length === 1) {
+        return strs[0];
+    }
+
     for (let i = 0; i < strs.length; i++) {
         if (i === 0) {
             curCharToMatch = strs[i][j];
@@ -63,5 +67,6 @@ var longestCommonPrefix = function(strs) {
     return longest;
 };
 
-// console.log(longestCommonPrefix(["dog","racecar","car"])) // ""
-console.log(longestCommonPrefix(["flower","flow","flight"])) // "fl"
+// console.log(longestCommonPrefix(["dog","racecar","car"])); // ""
+// console.log(longestCommonPrefix(["flower","flow","flight"])); // "fl"
+console.log(longestCommonPrefix(["f"])); // f
