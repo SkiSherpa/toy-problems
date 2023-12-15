@@ -34,6 +34,11 @@ const recursivelyGetHeight = (root, depth) => {
     if(!root) {
         return depth;
     }
+
+    console.log("R)))", root);
+    console.log("current depth ", depth);
+    console.log("L", root.left);
+    // get the highest depth count from either the left or right node
     let ans = Math.max(
         recursivelyGetHeight(root.left, depth + 1),
         recursivelyGetHeight(root.right, depth + 1)

@@ -30,6 +30,7 @@ function getDigit(num, place) {
       // Create 10 buckets (0 to 9) for each digit place -
       // makes an empty array to place numbers that go in that digits' place
       // will always be 0-9, b/c our counting for this is base 10
+      //  This is always a constant number, doesn't scale with arr.length
       const buckets = Array.from({ length: 10 }, () => []);
       console.log("1st loop: ", buckets);
 
