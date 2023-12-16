@@ -1,7 +1,5 @@
 // using tree from makeTree, find the largest value.
-
 // makeTree larget val = 13
-// binaryTree largest cal = 8
 
 // makeTree
 class TreeNode {
