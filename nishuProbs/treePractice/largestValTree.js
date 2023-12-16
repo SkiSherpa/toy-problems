@@ -31,7 +31,6 @@ Node7.children.push(Node11, Node12, Node13);
 
 const makeTree = root;
 
-
 // biTree
 
 console.log(makeTree);
