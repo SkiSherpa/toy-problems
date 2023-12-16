@@ -1,6 +1,4 @@
-// using trees from makeBiTree and makeTree, find the largest value.
-
-
+// using tree from makeTree, find the largest value.
 
 // makeTree larget val = 13
 // binaryTree largest cal = 8
@@ -34,9 +32,13 @@ Node5.children.push(Node7);
 Node7.children.push(Node11, Node12, Node13);
 
 const makeTree = root;
-// Need something that traverses the whole tree
-// updating "largest" value as you g
 
+
+// biTree
+
+console.log(makeTree);
+// Need something that traverses the whole tree
+// updating "largest" value as you go
 
 const largestVal = (root) => {
     console.log("hi");
