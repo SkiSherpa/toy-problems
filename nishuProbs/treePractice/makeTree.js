@@ -36,6 +36,3 @@ Node2.children.push(Node3, Node1);
 Node6.children.push(Node9);
 Node5.children.push(Node7);
 Node7.children.push(Node11, Node12, Node13);
-
-
-console.log(root);
