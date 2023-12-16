@@ -51,7 +51,7 @@ Node7.children.push(Node11, Node12, Node13);
 
 // return obj[curMax]
 
-function findMaxChildren(node, mostKids = {}, curMax = 0) {
+function _findMaxChildren(node, mostKids = {}, curMax = 0) {
     if (node === null) {
         return mostKids;
     }
@@ -68,6 +68,37 @@ function findMaxChildren(node, mostKids = {}, curMax = 0) {
         findMaxChildren(curChild, mostKids, curMax);
     }
     return mostKids[curMax];
+
+}
+
+function findMaxChildren(root, mostKids = {}, curMax = 0) {
+    if (!root) {
+        return [];
+    }
+
+    function dfs(node) {
+        if (!node) {
+            return;
+        }
+
+        if (node.children.length > curMax) {
+            mostKids[node.children.length] = [node]
+            curMax = node.children.length
+        } else if (node.children.length === curMax) {
+            mostKids[node.children.length].push(node);
+        }
+
+        for (let i = 0; i < node.children.length; i++) {
+            let child = node.children[i];
+            dfs(child);
+        }
+    }
+    dfs(root);
+
+    // loop over mostKids to find largest key
+    // you need the spread for Math.max to work
+    let maxCount = Math.max(...Object.keys(mostKids));
+    return mostKids[maxCount];
 
 }
 
