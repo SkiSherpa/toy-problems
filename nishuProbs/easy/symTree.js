@@ -1,3 +1,4 @@
+// https://leetcode.com/problems/symmetric-tree/solutions/2423766/easy-0-ms-100-fully-explained-java-c-python-js-python3/
 /**
  * Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
 
@@ -55,8 +56,31 @@ Output: false
 // check for depth of all branches
     // if depth is not equal for a ll branched, return false
 // check each levels numebrs
+
+// level check - bfs search
 var isSymmetric = function(root) {
 
+};
+
+// Someone' Sol:
+var isSymmetric = function(root) {
+    // Edge case
+    if (!root)
+        return true;
+    // Return the function recursively...
+    return isSame(root.left, root.right);
+};
+// A tree is called symmetric if the left subtree must be a mirror reflection of the right subtree...
+var isSame = function (leftroot, rightroot) {
+    // If both root nodes are null pointers, return true...
+    // If exactly one of them is a null node, return false...
+    // If root nodes haven't same value, return false...
+    if ((!leftroot && rightroot) || (leftroot && !rightroot) || (leftroot && rightroot && leftroot.val !== rightroot.val))
+        return false;
+    // Return true if the values of root nodes are same and left as well as right subtrees are symmetric...
+    if (leftroot && rightroot)
+        return isSame(leftroot.left, rightroot.right) && isSame(leftroot.right, rightroot.left);
+    return true;
 };
 
 

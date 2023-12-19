@@ -31,14 +31,22 @@ Node7.children.push(Node11, Node12, Node13);
 
 const makeTree = root;
 
-// biTree
-
-console.log(makeTree);
-// Need something that traverses the whole tree
-// updating "largest" value as you go
-
-const largestVal = (root) => {
-    console.log("hi");
+// IF the value of the current not is greater than largest
+    // set largest to the current val
+// loop through children
+    // recursive call on all children
+// return largest
+const largestVal = (node, largest = 0) => {
+    if (!node) {
+        return largest;
+    }
+    if (node.value > largest) {
+        largest = node.value;
+    }
+    for (let i = 0; i < node.children.length; i++) {
+        largest = largestVal(node.children[i]);
+    }
+    return largest;
 }
 
 console.log(largestVal(makeTree));
