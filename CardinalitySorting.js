@@ -17,6 +17,10 @@ The return array is [1, 2, 4, 3]
 cardinalitySort takes on param of nums an array
 */
 
+// IP: array of nums - base 10 ints
+// OP: array of nums - base 10 ints sorted by binary cardinality
+// Instead of cardinality use "hamming weight" or "population count"
+
 function cardinalitySort(nums) {
 
 }
