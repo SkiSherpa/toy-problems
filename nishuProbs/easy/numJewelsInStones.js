@@ -42,7 +42,7 @@ All the characters of jewels are unique.
             // count++
 
 //  t = O(n*m), where n = IP size of jewels and m = IP size of stones
-var numJewelsInStones = function(jewels, stones) {
+var _numJewelsInStones = function(jewels, stones) {
     let count = 0;
     for (let i = 0; i < jewels.length; i++) {
         let curJewel = jewels[i];
@@ -59,3 +59,25 @@ var numJewelsInStones = function(jewels, stones) {
 //  t = O(n*m), where n = IP size of jewels and m = IP size of stones
 // mem = O(1)
 // t = 51ms, 72.48% | mem = 42.46MB, 40.57%
+
+// Someones O(S), where S is the size of stones IP
+const numJewelsInStones = (J, S) => {
+    // Create a Set called 'jewels' containing the characters from string 'J'
+    const jewels = new Set(J);
+    // Use the reduce function to iterate through each character in string 'S'
+    // and accumulate the count of characters that are also in the 'jewels' Set
+    console.log(S.split(''));
+
+    return S.split('').reduce((res, s) => res + jewels.has(s), 0)
+};
+// A Set is a data structure that stores unique values,
+// so this Set will contain the unique characters from the J string.
+// jewels.has(s) returns "true" IF cur char "s" is in the "jewels" set
+    //  IN JS, TRUE CAN BE CONVERTED TO 1 when added to a number, like res
+    // IF TRUE IS CONVERTED TO A NUMBER IT IS ALWAYS 1
+    // Similarly, false can be converted to Zero
+console.log(numJewelsInStones("aA", "aAAbbbb")); // 3
+console.log(numJewelsInStones("z", "ZZ")); // 0
+
+// t = O(m+n)
+// m = O(m+n)
