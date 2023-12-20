@@ -103,3 +103,13 @@ var getIntersectionNode = function(headA, headB) {
     return 0;
 };
 // my function is returning "undefined" for when there is no intersection, and I can't figure out why
+
+// Someone's sol and chatGPT's when I was trouble shooting:
+var getIntersectionNode = function(headA, headB) {
+    let a = headA, b = headB
+        while (a !== b) {
+            a = !a ? headB : a.next
+            b = !b ? headA : b.next
+        }
+        return a
+}
