@@ -71,6 +71,35 @@ Follow up: Could you write a solution that runs in O(m + n) time and use only O(
  * @param {ListNode} headB
  * @return {ListNode}
  */
-var getIntersectionNode = function(headA, headB) {
+// IP: the head of 2 linked lists
+// OP: A node - intersection of both lists
+// C: return zero if not found
 
+// You verify your at the same node b/c nodeA and nodeB point to the same next node
+
+// set a pointer for listB = 0
+
+// loop through listA
+    // IF nodeA.next === nodeB.next && nodeA.val === nodeB.val
+        // return nodeA (it should be the same as nodeB )
+// once through listA
+    // increase bPointer by one
+var getIntersectionNode = function(headA, headB) {
+    let StartAList = headA;
+    while (headB) {
+    // console.log("B.val", headB.val, "B.next", headB.next);
+        while (headA) {
+            console.log("A.val", headA.val, "B.val", headB.val, headB.next);
+            if (headA.next === headB.next && headA === headB && headA.val === headB.val) {
+                console.log("before return: ", headA.val, headB.val )
+                return headB;
+            }
+            headA = headA.next;
+        }
+        // reset headA to begining of list
+        headA = StartAList;
+        headB = headB.next;
+    }
+    return 0;
 };
+// my function is returning "undefined" for when there is no intersection, and I can't figure out why
