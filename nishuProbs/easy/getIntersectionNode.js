@@ -105,6 +105,12 @@ var getIntersectionNode = function(headA, headB) {
 // my function is returning "undefined" for when there is no intersection, and I can't figure out why
 
 // Someone's sol and chatGPT's when I was trouble shooting:
+/*
+it keeps looping, more than once, setting to the next node, or when you get the end of the list it resets to the beginning (the truthy headB/headA part).
+B/c the lists are different lengths, eventually a will = b.
+Since, they're the same you can return either a or b.
+The propt at the very begining says to return null, not zero or a string like in the examples. eventually the two list could be null if there is no intersection and that is what is returned
+*/
 var getIntersectionNode = function(headA, headB) {
     let a = headA, b = headB
         while (a !== b) {
