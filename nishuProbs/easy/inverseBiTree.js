@@ -69,7 +69,7 @@ m = 42.71MB, 6.5%
 
 // this is so similar but, faster
 // t = 50ms, 67.90% | m = 42.45MB, 24.53%
-let _invertTree = function(root) {
+let invertTree2 = function(root) {
     // Base case...
     if(root == null){
         return root
@@ -84,3 +84,22 @@ let _invertTree = function(root) {
     root.right = curr
     return root         // Return the root...
 }
+// ITS JUST SETTING THE ONE VAR INSTEAD OF 2
+// If I change my solution to this:
+var invertTree = function(root) {
+    if (!root) {
+         return root;
+     }
+
+     let left = root.left;
+     root.left = root.right;
+     root.right = left;
+
+     invertTree(root.left)
+     invertTree(root.right);
+
+     return root;
+ };
+//  t = 50ms, 67.98%
+// m = 42.09MB, 69.42%
+// Its in general better, t is the same, but mem is much better
