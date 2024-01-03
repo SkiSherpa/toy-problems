@@ -1,4 +1,6 @@
 /*
+https://leetcode.com/problems/palindrome-linked-list/
+
 Given the head of a singly linked list, return true if it is a
 palindrome
  or false otherwise.
@@ -52,8 +54,8 @@ Follow up: Could you do it in O(n) time and O(1) space?
 // return false
 
 var isPalindrome = function(head) {
+    // assuming that an empty list is false
     if (head === null) {
-        // assuming that an empty list is false
         return false;
     }
     let stack = [head.val];
@@ -64,7 +66,7 @@ var isPalindrome = function(head) {
         isLenOne = false;
     }
     console.log("Before while stack:", stack[stack.length - 1], head);
-// when head.val is the num zero, its falsy
+    // when head.val is the num zero, its falsy
     while (head !== null && typeof head.val === "number") {
         console.log("while head.val:", head.val, "stack[stack.length - 1]", stack[stack.length - 1]);
         if (head.val !== stack[stack.length - 1]) {
@@ -89,4 +91,6 @@ var isPalindrome = function(head) {
 
 /* FAILS IS THE LIST IS ODD!
 THIS BREAKS MY CODE [1, 0, 1]
+goes up to test 70/93
+
 */
