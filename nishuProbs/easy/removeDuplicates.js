@@ -62,7 +62,7 @@ nums is sorted in non-decreasing order.
 
 // [i0,j0,1,1,1,2,2,3,3,4] -> [0,i0,j1,1,1,2,2,3,3,4] -> [0,1,i0,j1,1...]
 
-var removeDuplicates = function(nums) {
+var _removeDuplicates = function(nums) {
     let i = 0;
     let j = 0;
     let count = 0;
@@ -84,9 +84,54 @@ var removeDuplicates = function(nums) {
     console.log(nums);
     return count;
 };
+// going for passing all tests
 
-// console.log(removeDuplicates([0,0,1,1,1,2,2,3,3,4]));
-console.log(removeDuplicates([1,1,2]));
+var removeDuplicates = function(nums) {
+    let len = nums.length;
+    // some edge cases
+    if (len === 0) {
+        return 0
+    }
+    if (len === 1) {
+        return 1;
+    }
+    if (len === 2) {
+        if (nums[0] === nums[1]) {
+            nums[1] = Infinity;
+            return 1;
+        } else { // nums[0] !== nums[1]
+            return 2;
+        }
+    }
+    // i needs to start at 0 in case nums is all a single value
+    let i = 0;
+    let j = 1;
+    let count = 0;
+    while (i < len) {
+        // console.log("i", i, "nums[i]", nums[i]);
+        // console.log("j", j, "nums[j]", nums[j]);
+        if (nums[i] === nums[j]) {
+            nums[j] = Infinity;
+            j++
+        } else { // nums[i] !== nums[j]
+            count++;
+            i=j;
+            j++;
+        }
+    }
+    // basic sort can not do negative and positive numbers together
+    // have to provide additional function to handle + & - nums together
+    nums.sort(function(a,b){
+        return a - b;
+    });
+    return count;
+};
+// t = 104ms, 20.%  | m = 50.46Mb, 5.06%
 
 // t = n + nlog(n) ~ O(nlog(n))
 // m = O(1)
+
+// console.log(removeDuplicates([0,0,1,1,1,2,2,3,3,4]));
+// console.log(removeDuplicates([1,1,2]));
+// console.log(removeDuplicates([1,2]));
+console.log(removeDuplicates([-3,-1,0,0,0,3,3]));
