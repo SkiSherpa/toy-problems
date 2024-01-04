@@ -45,12 +45,38 @@ Follow up: Can you solve it using O(1) (i.e. constant) memory?
  * @param {ListNode} head
  * @return {boolean}
  */
+// IP: head of linked list
+// OP: boolean
+// E: Linked list could be empty
+
 // TORTISE AND HARE ALGO FOR SOL
 // two pointers
 // a fast that goes to the next.next node
 // a slow that goes to the next node
 // IF there is a cycle, the two pointer will eventually land on the same node
 
+//
+// WHILE (fastNode exist)
+// IF fast node === slow node
+    // return true
+// return false
 var hasCycle = function(head) {
-
+    if (head === null) {
+        return false;
+    }
+    let fast = head.next;
+    let slow = head;
+    while (fast) {
+        if (fast === slow) {
+            return true;
+        }
+        if (fast.next === null || fast.next.next === null) {
+            return false;
+        }
+        slow = slow.next;
+        if (fast.next) {
+            fast = fast.next.next;
+        }
+    }
+    return false;
 };
