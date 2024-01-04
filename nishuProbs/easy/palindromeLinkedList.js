@@ -37,10 +37,45 @@ Follow up: Could you do it in O(n) time and O(1) space?
 // IP: head of a linkedlist
 // OP: a bool - true is palindrome
 // C: single direction linked list
+// C: list of length 1 is TRUE
 
-// use a stack to determine linked list
-// stretch goal - create flag for item already removed
+// push all vals into an arr, and solve like a normal palindrome
 
+// create an empty arr as "list"
+// push current head into list - its the first val
+// loop through linkedList
+    // push in all vals to "list" arr
+// create two pointers, i (front of list) and j (back of list)
+// while pointer i < half the length of the "list" plus one
+    // if list[i] !== list[j]
+        // return false
+// return true
+var isPalindrome = function(head) {
+    if (head === null) {
+        // assuming that an empty list is false
+        return false;
+    }
+    let list = [head.val];
+    // moving to the next node
+    head = head.next;
+    while (head) {
+        list.push(head.val);
+        head = head.next;
+    }
+    let i = 0;
+    let j = list.length - 1;
+    while (i < j) {
+        if (list[i] !== list[j]) {
+            return false
+        }
+        i++;
+        j--;
+    }
+    return true;
+};
+
+
+/* intiail attempt with a stack - did not work with odd lengths */
 // create an empty arr as "stack"
 // push current head into stack - its the first val
 // loop through list starting with the "next" val
@@ -53,7 +88,7 @@ Follow up: Could you do it in O(n) time and O(1) space?
     // return true
 // return false
 
-var isPalindrome = function(head) {
+var _isPalindrome = function(head) {
     // assuming that an empty list is false
     if (head === null) {
         return false;
