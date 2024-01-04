@@ -73,6 +73,12 @@ var isPalindrome = function(head) {
     }
     return true;
 };
+// t = O(1.5n) ~ O(n), where n is the number of nodes
+//  mem = O(n),  the "list" arr will have n values in it,
+    // where n is the number of nodes.
+    // a few constants to keep track of like i and j
+
+// t = 117ms, 55.95% | m = 79.13MB, 40.75%
 
 
 /* intiail attempt with a stack - did not work with odd lengths */
