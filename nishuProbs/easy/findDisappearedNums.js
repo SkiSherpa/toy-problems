@@ -32,6 +32,42 @@ Follow up: Could you do it without extra space and in O(n) runtime? You may assu
 // C: Can there be ints out side the range of 1 to n contained in nums?
 // E: IF "nums" is empty, return empty arr
 
+/* Using a SET insetead of an array */
+
+// create "uniqNums" set to hold all the unique vals from nums
+// create "missingNums" array to return
+// loop through nums
+    // add each num to "uniqNums"
+// loop through 1 to n, j
+    // IF (!uniqNums.has(j))
+        // add j to missingNums
+// return missing nums
+var _findDisappearedNumbers = function(nums) {
+    if (nums.length === 0) {
+        return [];
+    }
+    let uniqNums = new Set;
+    let missingNums = []
+    let n = nums.length;
+    for (let i = 0; i < n; i++) {
+        uniqNums.add(nums[i]);
+    }
+    for (let j = 1; j <= n; j++) {
+        if (!uniqNums.has(j)) {
+            missingNums.push(j);
+        }
+    }
+    return missingNums;
+};
+
+
+
+
+
+
+
+
+/* Using an array to hold nums, times out */
 // what are the missing numbers from 1 - (len of "nums")
 // create an empty array "arr"
 // make "n" var equal to length of "nums"
@@ -44,7 +80,7 @@ Follow up: Could you do it without extra space and in O(n) runtime? You may assu
             // add i to "arr"
 
 // return arr
-var findDisappearedNumbers = function(nums) {
+var _findDisappearedNumbers = function(nums) {
     if (nums.length === 0) {
         return [];
     }
