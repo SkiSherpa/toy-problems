@@ -60,6 +60,9 @@ var _findDisappearedNumbers = function(nums) {
     return missingNums;
 };
 
+// t = O(n) ~ O(2n)| m = O(n), where n is the length of nums for both t & m
+// t = 88ms 66.94% | m = 52.82MB 38.87%
+
 
 
 
