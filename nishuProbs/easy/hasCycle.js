@@ -45,6 +45,12 @@ Follow up: Can you solve it using O(1) (i.e. constant) memory?
  * @param {ListNode} head
  * @return {boolean}
  */
+// TORTISE AND HARE ALGO FOR SOL
+// two pointers
+// a fast that goes to the next.next node
+// a slow that goes to the next node
+// IF there is a cycle, the two pointer will eventually land on the same node
+
 var hasCycle = function(head) {
 
 };
