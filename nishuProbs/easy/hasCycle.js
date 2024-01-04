@@ -74,9 +74,8 @@ var hasCycle = function(head) {
             return false;
         }
         slow = slow.next;
-        if (fast.next) {
-            fast = fast.next.next;
-        }
+        fast = fast.next.next;
+
     }
     return false;
 };
