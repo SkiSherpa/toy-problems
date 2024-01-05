@@ -76,15 +76,17 @@ var findUnsortedSubarray = function(nums) {
         }
         start++;
     }
-    console.log(end);
+    // console.log(end);
     while (end >= start) {
-        console.log("in end loop, start, end", start, end);
-        if (nums[end - 1] >= nums[end]) {
+        // console.log("in end loop, start, end", start, end);
+        if (nums[end - 1] > nums[end]) {
+            break;
+        } else if (nums[end - 1] === nums[end]) {
             break;
         }
         end--
     }
-    console.log("start, end", start, end) // 1,4
+    // console.log("start, end", start, end) // 1,4
     let sub = nums.slice(start, end+1);
     // console.log(sub);
     return sub.length;
@@ -95,7 +97,11 @@ var findUnsortedSubarray = function(nums) {
 // console.log(findUnsortedSubarray([2])) // 0
 // console.log(findUnsortedSubarray([2,6])) // 0
 // console.log(findUnsortedSubarray([2,6,4])) // 2
-// ---
-// console.log(findUnsortedSubarray([1,3,2,2,2])) // 4
+// console.log(findUnsortedSubarray([2,2,2,2,2]));// 0
+// // ---
 // console.log(findUnsortedSubarray([1,2, 3, 3, 3])) // 0
-console.log(findUnsortedSubarray([1,3,2,3,3])) // 2
+// These two are contradicting each other in my code, might need a new approach.
+console.log("ans", findUnsortedSubarray([1,3,2,2,2])) // 4
+    // code giving [3,2]
+console.log("ans", findUnsortedSubarray([1,3,2,3,3])) // 2
+// ---
