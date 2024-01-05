@@ -79,3 +79,7 @@ var hasCycle = function(head) {
     }
     return false;
 };
+
+// t = O(n), you'll go through the whole list
+// m = O(1), not making anything new except for a few vars that are being updated
+// t = 63ms 66.83% | m = 45.36MB 26.38%
