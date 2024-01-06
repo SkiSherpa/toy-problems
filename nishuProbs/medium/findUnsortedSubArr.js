@@ -53,7 +53,7 @@ Follow up: Can you solve it in O(n) time complexity?
 
 // slice subarray using start and end
 // return subarray length;
-var findUnsortedSubarray = function(nums) {
+var _findUnsortedSubarray = function(nums) {
     if (nums.length === 0 || nums.length === 1) {
         return 0;
     }
@@ -76,21 +76,48 @@ var findUnsortedSubarray = function(nums) {
         }
         start++;
     }
-    // console.log(end);
+    // console.log("bnefore isSame, end", end);
+    let isSame = end;
+    // console.log("isSame", isSame);
     while (end >= start) {
         // console.log("in end loop, start, end", start, end);
         if (nums[end - 1] > nums[end]) {
+            end = isSame;
             break;
-        } else if (nums[end - 1] === nums[end]) {
+        }
+        if (nums[end - 1] < nums[end]) {
+            // set end to isSame
             break;
         }
         end--
     }
-    // console.log("start, end", start, end) // 1,4
+    // console.log("start, end", start, end, "isSame", isSame) // 1,4
     let sub = nums.slice(start, end+1);
     // console.log(sub);
     return sub.length;
 };
+
+
+var findUnsortedSubarray = function(nums) {
+    let len = nums.length - 1;
+    let left = -1;
+    let right = -1;
+    let  max = nums[0];
+    let min = nums[len];
+
+    for (let i = 1; i <= len; i++) {
+        let a = nums[i]
+        let b = nums[len-i];
+        console.log("a < max", a, "<", max);
+        console.log("b > min", b, ">", min);
+        a < max ? right = i : max = a;
+        b > min ? left = i : min = b;
+        console.log("max, min", max, min, "r", right, "L", left); // max = a = 6, min = b = 9
+        console.log("======");
+    }
+    console.log(left,"+", right,"-", len, "+1");
+    return Math.max(0, left + right - len + 1)
+}
 
 // console.log(findUnsortedSubarray([2,6,4,8,10,9,15])) // 5
 // console.log(findUnsortedSubarray([1,2,3,4])) // 0
@@ -98,10 +125,10 @@ var findUnsortedSubarray = function(nums) {
 // console.log(findUnsortedSubarray([2,6])) // 0
 // console.log(findUnsortedSubarray([2,6,4])) // 2
 // console.log(findUnsortedSubarray([2,2,2,2,2]));// 0
-// // ---
+// // // ---
 // console.log(findUnsortedSubarray([1,2, 3, 3, 3])) // 0
 // These two are contradicting each other in my code, might need a new approach.
-console.log("ans", findUnsortedSubarray([1,3,2,2,2])) // 4
-    // code giving [3,2]
+// console.log("ans", findUnsortedSubarray([1,3,2,2,2])) // 4
+// below is the odd case where the prev is smaller
 console.log("ans", findUnsortedSubarray([1,3,2,3,3])) // 2
 // ---
