@@ -71,6 +71,10 @@ var findUnsortedSubarray = function(nums) {
 // t = O(nlog(n)), where n is the number of numbers.
     // I think nlog(n) from the sort, the two whiles together is ~ n. = nlog(n) + n
     // If nums is sorted, then first while will go through the whole list
+// m = O(n), where n is the number of numbers
+    // You have to make a whole copy of the arr, there are some const to keep track of
+// t = 73ms 29.05% | m = 46.3MB 27.03%
+
 
 // a pincer
 // start = 0
