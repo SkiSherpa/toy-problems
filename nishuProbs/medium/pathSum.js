@@ -37,6 +37,60 @@ The number of nodes in the tree is in the range [0, 1000].
  * @param {number} targetSum
  * @return {number}
  */
-var pathSum = function(root, targetSum) {
+// IP: root of a bi tree, target number
+// OP: number - number of paths that equal target sum
 
+// OTHER SOL, BUT IS CLOSE TO WHAT YOUR THINK IS
+// https://www.youtube.com/watch?v=VDTZiggKlAE
+// his sol is in python, and comes up with a more optimal way that is similar to the top JS sol on leet code.
+const pathSum = (root, targetSum) => {
+	let count = 0;
+    let helper = function(node, curVal) {
+        if (!node) return;
+        // find children val + curVal
+        helper(node.left, curVal + node.val);
+        helper(node.right, curVal + node.val);
+        if (curVal + node.val === targetSum) {
+            count++;
+        }
+    }
+    let dfs = function(node) {
+        if (!node) return;
+        helper(node,0);
+        dfs(node.left);
+        dfs(node.right);
+    }
+    dfs(root);
+    return count;
+};
+// check every path for tree and sub-tree with dfs search
+// create count var and set to zero
+// call dfs helper on root and target sum
+var _pathSum = function(root, targetSum) {
+    let count = 0;
+
+    let dfs = function(node, targetSum, curSum) {
+        if (!node) {
+            return;
+        }
+        // IF current val + curSum === targetSum
+            // count++
+        if (node.val + curSum === targetSum) {
+            count++;
+        }
+        //  check left and right children
+        dfs(node.left);
+        dfs(node.right)
+        return;
+    }
+    dfs(root, targetSum, curSum=0);
+
+    // while(root.right) {
+    //     dfs(root.right, targetSum, curSum=0);
+    // }
+    // while(root.left) {
+    //     dfs(root.left, targetSum, curSum=0);
+    // }
+
+    return count;
 };
