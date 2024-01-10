@@ -39,20 +39,45 @@ num only consists of digits and does not contain any leading zeros.
 
 // IF the current num is odd
     // return current number
+// loop to slice off the final digit
+    // newNum is a number with last digit popped
+    // IF newNum is odd
+        // return newNum as a string
+    // set num to string of newNum
+
+// finding single digits
 // loop through num
     // IF the current is odd
         // return the current
 var largestOddNumber = function(num) {
-    if (Number(num) % 2 === 1) {
+    // check if the last digit is num
+    if (Number(num[num.length - 1]) % 2 !== 0) {
         return num;
     }
-    for (let i = 0; i < num.length; i++) {
-        if (Number(num[i]) === 1) {
+    let numCopy = num;
+    // loop to slice off last digit in num
+    for (let j = num.length - 1; j >= 0; j--) {
+        let newNum = num.slice(0,j);
+        if (Number(newNum[newNum.length - 1]) % 2 === 1) {
+            return newNum;
+        }
+        num = newNum;
+    }
+
+    // finding single digist
+    for (let i = 0; i < numCopy.length; i++) {
+        if (Number(numCopy[i]) === 1) {
             return "1";
         }
-        if (Number(num[i]) % 2 === 1) {
-            return num[i];
+        if (Number(numCopy[i]) % 2 === 1) {
+            return numCopy[i];
         }
     }
     return "";
 };
+
+// console.log("ans: 1013389", largestOddNumber("10133890")); // test 118/196
+//  console.log("ans: 239537672423884969653287101", largestOddNumber("239537672423884969653287101")); // test 125/196
+//  console.log("ans: 36916697848018451", largestOddNumber("3691669784801845146")); // test 125/196
+// No logs for leetcode, it can't handle the too large of numbers
+// t =  O(n)
