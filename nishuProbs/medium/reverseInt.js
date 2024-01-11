@@ -54,7 +54,7 @@ Constraints:
     // return reverseNum
 // return 0;
 var reverse = function(x) {
-    // Check if x is within the 32-bit integer range
+    // Check if x is outside the 32-bit integer range
     if (x < Math.pow(-2, 31) || x > Math.pow(2, 31) - 1) {
         return 0;
     }
@@ -65,23 +65,32 @@ var reverse = function(x) {
         isNeg = true;
         x = Math.abs(x);
     }
+    // reverse and place into arr - concat slower than .join, O(n+m) < O(n)
     let reverseStrArr = [];
-    let len = x.length - 1;
+    let len = strNum.length - 1;
     for (let i = len; i >= 0; i--) {
         reverseStrArr.push(strNum[i]);
     }
-    revNum = Number(reverseStrArr.join());
+    // make a number
+    revNum = parseInt(reverseStrArr.join(''), 10); // parseInt & join are both O(n)
+    // IF x was a negative number
     if (isNeg) {
         revNum *= -1;
     }
-    console.log(revNum);
+
     // Check if x revNum outside the 32-bit integer range
     if (revNum < Math.pow(-2, 31) || revNum > Math.pow(2, 31) - 1) {
         return 0;
     }
 
     return revNum;
-
 };
+// t = O(n), is the number of digits in x
+    // for loop, join, parseInt are all O(n) -> n+n+n = 3n ~> O(n)
+// m = O(n), is the number of digits in x
+    // the temp arr holds every digit
+// t = 68ms, 34.31% | m = 44.24MB 25.66%
 
-console.log('ANS: 123',reverse(321));
+// console.log('ANS: 123',reverse(321));
+// console.log('ANS: -123',reverse(-321));
+console.log('ANS: 0',reverse(1n));
