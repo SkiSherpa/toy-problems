@@ -36,47 +36,66 @@ Constraints:
 
 -2^31 <= val <= (2^31) - 1
 Methods pop, top and getMin operations will always be called on non-empty stacks.
-At most 3 * 104 calls will be made to push, pop, top, and getMin.
+At most 3 * 10^4 calls will be made to push, pop, top, and getMin.
 */
 
+// return an empty array
 var MinStack = function() {
-
+    this.stack = [];
+    this.min = [];
 };
 
 /**
  * @param {number} val
  * @return {void}
  */
+//  push goes to the end of the array
+// create a new slot at the end
+// add the value to new slot
 MinStack.prototype.push = function(val) {
-
+    this.stack[this.stack.length] = val;
+    let lastMinItem = this.min[this.min.length - 1];
+    // IF the min is populated, compare the last item in min to val
+        // that's the point of val, val
+        // your comparing: this.min.length > 0 ? lastMinItem : val VS. val
+    let minVal = Math.min(this.min.length > 0 ? lastMinItem : val, val)
+    this.min[this.min.length] = minVal;
 };
 
 /**
  * @return {void}
  */
+//  removes the back element of the array, and returns that element
 MinStack.prototype.pop = function() {
-
+    // removing the last item in stack and min
+    delete this.stack[this.stack.length - 1];
+    delete this.min[this.min.length - 1];
+    // deleting the last slot in stack and min
+    this.stack.length = this.stack.length - 1;
+    this.min.length = this.min.length - 1;
 };
 
 /**
  * @return {number}
  */
+//  returning the last element - does not delete
 MinStack.prototype.top = function() {
-
+    return this.stack[this.stack.length - 1];
 };
 
 /**
  * @return {number}
  */
+//  returns the smallest element
 MinStack.prototype.getMin = function() {
-
+    return this.min[this.min.length - 1];
 };
 
-/**
- * Your MinStack object will be instantiated and called as such:
- * var obj = new MinStack()
- * obj.push(val)
- * obj.pop()
- * var param_3 = obj.top()
- * var param_4 = obj.getMin()
- */
+// t = O(1), this makes sense
+// m = O(1), this could not be, because of the saving of the two stacks,
+    // but since the stacks are called out side of each fn call, I think it make it constant
+
+// The idea for the min stack and turtiary line isn't yours,
+// but the this.stack[this.stack.length] is faster than using .push or .pop in their methods
+// which is allowed, but seems like it shouldn't
+// t = 81ms 91.84% | m = 49.72MB 50.74%
