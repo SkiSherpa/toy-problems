@@ -46,5 +46,21 @@ Both list1 and list2 are sorted in non-decreasing order.
 // OP: list2 with list1 nodes insearted in proper order
 //  C: list2 is the one to be returned
 var mergeTwoLists = function(list1, list2) {
-
+    if (!list1) {
+        return list2;
+    } else if (!list2) {
+        return list1;
+    } else if (list1.val <= list2.val) {
+        list1.next = mergeTwoLists(list1.next, list2);
+        console.log("list1 and list2", list1, list2);
+        return list1;
+    } else {
+        list2.next = mergeTwoLists(list1, list2.next);
+        console.log("1, 2", list1, list2)
+        return list2;
+    }
 };
+
+// This solution is not mine, it uses a stack
+// t = O(n+m), where n and m are the length of the two lists
+// m = O(1), constantly overwiting what is given to you
