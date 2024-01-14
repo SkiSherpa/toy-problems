@@ -28,12 +28,12 @@
 
 let mergeTwoArrays = function (arr1, arr2) {
     // edge cases return an og array, when you should return something new
-    // if (arr1.length === 0) {
-    //     return arr2;
-    // }
-    // if (arr2.length === 0) {
-    //     return arr1;
-    // }
+    if (arr1.length === 0) {
+        return arr2;
+    }
+    if (arr2.length === 0) {
+        return arr1;
+    }
     let i = 0;
     let j = 0;
     let combo = [];
@@ -70,6 +70,9 @@ let mergeTwoArrays = function (arr1, arr2) {
     return combo;
 }
 
-console.log([1,2,2,3,3,4], mergeTwoArrays([1,2,3], [2,3,4]));
+
+// console.log([1,2,2,3,3,4], mergeTwoArrays([1,2,3], [2,3,4]));
 // console.log([1,2,3,4,5], mergeTwoArrays([1,2], [3,4,5]));
-// console.log([3,4,5], mergeTwoArrays([], [3,4,5]));
+console.log([3,4,5], mergeTwoArrays([], [3,4,5]));
+console.log([3,4,5], mergeTwoArrays([3,4,5], []));
+// module.exports = mergeTwoArrays;
