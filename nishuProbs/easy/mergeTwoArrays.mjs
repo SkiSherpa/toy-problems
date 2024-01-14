@@ -26,7 +26,7 @@
 // t = O(n+m), where n and m are the number of items in arr1 and arr2, respectively
 // m = O(n+m), where n and m are the number of items in arr1 and arr2, respectively
 
-let mergeTwoArrays = function (arr1, arr2) {
+export function mergeTwoArrays(arr1, arr2) {
     // edge cases return an og array, when you should return something new
     if (arr1.length === 0) {
         return arr2;

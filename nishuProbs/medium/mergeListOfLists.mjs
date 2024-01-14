@@ -1,7 +1,7 @@
 // merging one list of lists
 // implement it with using mergeTwoArrays.js from easy dir
 
-let mergeTwoArrays = function (arr1, arr2) {
+let _mergeTwoArrays = function (arr1, arr2) {
     if (arr1.length === 0) {
         return arr2;
     }
@@ -44,6 +44,7 @@ let mergeTwoArrays = function (arr1, arr2) {
     // combo = call mergeTwoArrays(list[0], list[1]);
 // go through rest of list - recusive
     // mergeTwoArrays(combo, next array in list);
+import { mergeTwoArrays } from "../easy/mergeTwoArrays.mjs";
 
 let mergeMultiList = function (list) {
     let i = 0;
@@ -60,11 +61,11 @@ let m = [[1,2,3], [1,2,3], [1,2,3]];
 let p = [[1,2,3], [4,5,6], []];
 
 console.log([1,2,3,4,5,6,7,8,9], mergeMultiList(n));
-console.log([1,1,1,2,2,2,3,3,3], mergeMultiList(m));
-console.log([1,2,3,4,5,6], mergeMultiList(p));
-console.log([], mergeMultiList([]));
-console.log([1,2,3], mergeMultiList([[1,2,3], []]));
-console.log([1,2,3], mergeMultiList([[1,2,3]]));
+// console.log([1,1,1,2,2,2,3,3,3], mergeMultiList(m));
+// console.log([1,2,3,4,5,6], mergeMultiList(p));
+// console.log([], mergeMultiList([]));
+// console.log([1,2,3], mergeMultiList([[1,2,3], []]));
+// console.log([1,2,3], mergeMultiList([[1,2,3]]));
 
 // t = O(n+m+p+...), when n, m, p... are the number of items in each sub array, O(n);
 // m = O(n+m+p+...), when n, m, p... are the number of items in each sub array, O(n);
