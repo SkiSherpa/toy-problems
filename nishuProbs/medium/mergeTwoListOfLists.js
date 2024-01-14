@@ -65,3 +65,6 @@ console.log([1,2,3,4,5,6], mergeMultiList(p));
 console.log([], mergeMultiList([]));
 console.log([1,2,3], mergeMultiList([[1,2,3], []]));
 console.log([1,2,3], mergeMultiList([[1,2,3]]));
+
+// t = O(n+m+p+...), when n, m, p... are the number of items in each sub array, O(n);
+// m = O(n+m+p+...), when n, m, p... are the number of items in each sub array, O(n);
