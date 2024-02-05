@@ -60,7 +60,7 @@ base case(n) - IF n === 0, return 1
 
 return countSteps(n-1) + countSteps(n-2)
 */
-let countSteps = function(n) {
+let _countSteps = function(n) {
     if (n === 0) {
         return 1;
     }
@@ -70,7 +70,32 @@ let countSteps = function(n) {
     return countSteps(n - 1) + countSteps(n - 2);
 }
 
-console.log(countSteps(5), "ans: 8");
+// console.log(countSteps(5), "ans: 8");
+// console.log(countSteps(13), "ans: 377");
+// console.log(countSteps(40), "ans: 165580141");
 // how to modify this to do in linear time
 // hint: memoization
 // right now its t = O(2^n) - real bad
+
+// memoization lets you store answers for functions that have been prev run to specific inputs
+// In this one we store them in array set to the index of the IP n.
+let countSteps = function(n, prevVals = []) {
+    if (prevVals[n] != null) {
+        return prevVals[n];
+    }
+    let result
+    if (n === 0) {
+        return 1;
+    } else if (n < 0) {
+        return 0;
+    } else {
+        result = countSteps(n - 1, prevVals) + countSteps(n - 2, prevVals);
+    }
+    prevVals[n] = result;
+    return result;
+}
+
+console.log(countSteps(13), "ans: 377");
+console.log(countSteps(40), "ans: 165580141");
+// mine is running slow, slower than not having memoize
+// I wasn't passing prevVals
