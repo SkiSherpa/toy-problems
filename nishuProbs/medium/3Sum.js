@@ -1,0 +1,100 @@
+/*
+Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+
+Notice that the solution set must not contain duplicate triplets.
+
+
+Example 1:
+
+Input: nums = [-1,0,1,2,-1,-4]
+Output: [[-1,-1,2],[-1,0,1]]
+    the ^^ -1s are prob different -1s in the IP, one a i = 0, and i = 4
+Explanation:
+nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0.
+nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0.
+nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0.
+The distinct triplets are [-1,0,1] and [-1,-1,2].
+Notice that the order of the output and the order of the triplets does not matter.
+
+Example 2:
+
+Input: nums = [0,1,1]
+Output: []
+Explanation: The only possible triplet does not sum up to 0.
+
+Example 3:
+
+Input: nums = [0,0,0]
+Output: [[0,0,0]]
+Explanation: The only possible triplet sums up to 0.
+
+
+Constraints:
+
+3 <= nums.length <= 3000
+-105 <= nums[i] <= 105
+*/
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+// IP: an array of ints
+// OP: array of arrays - each sub array is of 3 distinct nums that sum to zero
+
+// store trplets in a map - to keep from dulicates
+// [-1,0,1,2,-1,-4][-1,0,1,2,-1,-4]
+// define nums length
+// create a copy of the nums array and double it
+// [-1,0,1,2,-1,-4]
+
+// [-1,0] -> figure out what you need to sum to zero
+    // 0 - [-1 + 0] = 1
+    // loop through the rest of numsCopy till end length, looking for a 1
+    // IF found add to [-1, 0] -> [-1, 0, 1]
+        // push to return array
+
+// [-1, 1]
+    // 0 - [-1, + 1] = 0, but no zero after 1, which ii good, shouldn't repeat
+    // go till end length, looking for zero
+    // IF statement shouldn't trigger, no push
+// do this until [-1, -1, -4]
+// then move partition up by 1
+// [0,1,2,-1,-4,-1]
+
+// [0, 1]
+    // 0 - [0+1] = -1
+var threeSum = function(nums) {
+    let triplets = new Map();
+    let copyNums = nums[0];
+    let len = copyNums.length - 1;
+
+    let start = 1;
+    while (start <= len) {
+        // adding the first number, ex -1
+        let curTriple = [copyNums[start - 1]];
+        // inner loop to change the start pointer
+        let i = start;
+        while (i <= len) {
+            let secondNum = copyNums[start];
+            curTriple.push(secondNum);
+            // find number to zum to zero
+            let targetNum = 0 - curTriple[0] + curTriple[1];
+            let j = i + 1;
+            while (j <= len) {
+                let current = copyNums[j];
+                console.log(1 , current);
+                // IF current sums to zero
+                    // sort triplet
+                    // add triplet to map
+
+                j++;
+            }
+            i++;
+        }
+        start++;
+    }
+
+
+};
+
+console.log(threeSum([[-1,0,1,2,-1,-4]]));
