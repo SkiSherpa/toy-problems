@@ -43,7 +43,7 @@ Constraints:
     // teams moving on: [(n - 1) / 2] + 1
 
 // matchCount var set to zero
-// WHILE n >= 0
+// WHILE n > 0
 // IF n is odd
     // calc matches and teams moving on
     // update matchCount
@@ -58,8 +58,28 @@ Constraints:
 // return matchCount
 
 var numberOfMatches = function(n) {
+    let matchCount = 0;
 
+    while (n > 0) {
+        if (n === 1) {
+            return matchCount;
+        }
+        if ( n % 2 === 1) {
+            matchCount += (n - 1)/2;
+            n = ((n - 1)/2) + 1;
+        } else {
+            matchCount += n/2;
+            n = n/2;
+        }
+    }
+    return matchCount;
 };
 
-console.log(6, numberOfMatches(7));
-console.log(13, numberOfMatches(14));
+// t = O(log(n)), where n is your input number
+// m = O(1), just matchCount is created and saved
+// t = 48ms 79.42%  , m = 48.83MB 10.36%
+
+// console.log(6, numberOfMatches(7));
+// console.log(13, numberOfMatches(14));
+console.log(0, numberOfMatches(1));
+console.log(0, numberOfMatches(0));
