@@ -102,9 +102,12 @@ var threeSum = function(nums) {
     nums.sort((a, b) => a - b);
 
     const result = [];
-
+    console.log(nums);
     // Iterate over the array
     for (let i = 0; i < nums.length - 2; i++) {
+        console.log('    ');
+        console.log('    ');
+        console.log('---  ---  new for it  ---  ---');
         // Skip duplicate values for the first element
         if (i > 0 && nums[i] === nums[i - 1]) {
             continue;
@@ -114,46 +117,57 @@ var threeSum = function(nums) {
         let right = nums.length - 1;
 
         while (left < right) {
+            console.log('    ');
+            console.log('~~~~~~~    new while it   ~~~~~~~~')
+            console.log('i ----', i,'left-', left,'right', right);
+            console.log('nums[i', nums[i], 'leftV', nums[left], 'Rval-', nums[right]);
             const sum = nums[i] + nums[left] + nums[right];
 
             if (sum === 0) {
                 // Found a triplet with sum 0
+                console.log("push", [nums[i], nums[left], nums[right]]);
                 result.push([nums[i], nums[left], nums[right]]);
 
                 // Skip duplicate values for the second element
+                // i+1 < nums.length (IF i = len)&&
                 while (left < right && nums[left] === nums[left + 1]) {
+                    console.log(`2nd DUP == i: ${i}, left(i+1): ${left}, right: ${right},nums[left]: ${left}, nums[left+1]: ${nums[left+1]}`);
                     left++;
                 }
 
                 // Skip duplicate values for the third element
                 while (left < right && nums[right] === nums[right - 1]) {
+                    console.log(`3rd DUP == i: ${i}, left(i+1): ${left}, right: ${right},nums[right]: ${right}, nums[right+1]: ${nums[right+1]}`)
                     right--;
                 }
 
                 // Move pointers
                 left++;
                 right--;
+                console.log('end IF, new pointers left:', left, 'right', right);
             } else if (sum < 0) {
                 // Move left pointer to increase the sum
                 left++;
+                console.log('sum < 0, left++, new left: ', left)
             } else {
                 // Move right pointer to decrease the sum
                 right--;
+                console.log(', right--, new right: ', right)
             }
         }
     }
 
     return result;
 };
-
-// Example usage:
 const nums1 = [-1, 0, 1, 2, -1, -4];
+// let left = i + 1;
+// let right = nums.length - 1;
 console.log(threeSum(nums1)); // Output: [[-1, -1, 2], [-1, 0, 1]]
 
-const nums2 = [0, 1, 1];
-console.log(threeSum(nums2)); // Output: []
+// const nums2 = [0, 1, 1];
+// console.log(threeSum(nums2)); // Output: []
 
-const nums3 = [0, 0, 0];
-console.log(threeSum(nums3)); // Output: [[0, 0, 0]]
+// const nums3 = [0, 0, 0];
+// console.log(threeSum(nums3)); // Output: [[0, 0, 0]]
 
-console.log(threeSum([[-1,0,1,2,-1,-4]]));
+// console.log(threeSum([[-1,0,1,2,-1,-4]]));
