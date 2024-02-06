@@ -26,13 +26,13 @@ The number of nodes in each linked list is in the range [1, 100].
 It is guaranteed that the list represents a number that does not have leading zeros.
 */
 
-/**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
+
+//  * Definition for singly-linked list.
+function ListNode(val, next) {
+    this.val = (val===undefined ? 0 : val)
+    this.next = (next===undefined ? null : next)
+}
+
 /**
  * @param {ListNode} l1
  * @param {ListNode} l2
@@ -54,7 +54,7 @@ It is guaranteed that the list represents a number that does not have leading ze
 // loop through string number from the back
 //     create new node for each digit
 // return newLList
-var addTwoNumbers = function(l1, l2) {
+var _addTwoNumbers = function(l1, l2) {
     let l1Str = '';
     let l2Str = '';
 
@@ -91,3 +91,48 @@ var addTwoNumbers = function(l1, l2) {
 
     return dummyHead.next; // skip the dummt head in the results
 };
+
+// toString and BigInt >> stringify or parseInt
+var addTwoNumbers = function(l1, l2) {
+    let l1Str = '';
+    let l2Str = '';
+
+    while (l1 || l2) {
+        if (l1) {
+            let val1 = l1.val.toString();
+            l1Str = val1.concat(l1Str);
+            l1 = l1.next;
+        }
+        if (l2) {
+            let val2 = l2.val.toString();
+            l2Str = val2.concat(l2Str);
+            l2 = l2.next;
+        }
+
+    }
+
+    let num1 = BigInt(l1Str);
+    let num2 = BigInt(l2Str);
+    let strSum = (num1 + num2).toString();
+
+    let dummyHead = new ListNode();
+    let newLList = dummyHead;
+
+    for (let i = strSum.length - 1; i >= 0; i--) {
+        let curNum = parseInt(strSum[i]);
+        let current = new ListNode(curNum);
+        newLList.next = current;
+        newLList = current;
+    }
+    return dummyHead.next; // skip the dummt head in the results
+};
+// t = O(n), where n is the longest of l1 or l2
+    // you have to hit every node in both l1 and l2, but each are checked on the same iteration
+    // you loop through same length of number hitting every digit, at most you could have n+1 if you go up by an order of magnitude
+// m = O(n), when n is the length of the new linked list
+
+
+// Test case - Ip is large
+const l1 = new ListNode(1, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(1)))))))))))))))))))))));
+const l2 = new ListNode(5, new ListNode(6, new ListNode(4)));
+console.log(addTwoNumbers(l1, l2)); // Output: ListNode { val: 6, next: ListNode { val: 6, next: ListNode { val: 4, next: ListNode { val: 0, next: ListNode { val: 0, next: ... } } } } }
