@@ -32,6 +32,28 @@ n == nums.length
  * @param {number} start
  * @return {number}
  */
-var xorOperation = function(n, start) {
+// IP: 2 ints - n and start
+// OP: a number
+// The ^ is like an operator, but needs to be done with vars that are numbers
+// It's NOT "to the power" like in math, but its own thing in code
 
+// define result var = start + 2 * i
+// define an array "nums", "n" is the length of "nums"
+    // use i+1 for the first part of the loop
+    // each element, w/ i as index, is nums[i] = start + 2 * i
+    // result ^= start + 2 * i
+// return result
+
+var xorOperation = function(n, start) {
+    let i = 0;
+    let result = 0; // 0^ any number is that number
+    for (i; i < n; i++) {
+        result ^= start + 2 * i;
+    }
+    return result;
 };
+// t = O(n), where n is n
+// m = O(1), I didn't end up making an array, just used the nums on each iteration
+// t = 53ms 51.45% | m = 48.96MB 8.70%
+console.log(xorOperation(5, 0), 'ans: ', 8);
+console.log(xorOperation(4, 3), 'ans: ', 8);
