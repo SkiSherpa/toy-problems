@@ -102,8 +102,69 @@ let findKClosestEle = function (arr, k, x) {
 // console.log(findKClosestEle([1,4,6,17,20], 3, 5)); // [1,4,6]
 // console.log(findKClosestEle([1,4,6,17,20], 3, 20)); // [6,17,20]
 // console.log(findKClosestEle([1,4,6,17,20], 3, 18)); // [6,17,20]
-console.log(findKClosestEle([1,4,6,17,20], 3, 2)); // [1,4,6]
+// console.log(findKClosestEle([1,4,6,17,20], 3, 2)); // [1,4,6]
 
 // use binary search to find target number - split arr in half each time, split in the middle
-// when arr is small - O(k+n), where n is the height of binary tree ~ log(n)
+// t = O(k+n), where n is the height of binary tree ~ log(n)
 // bi search = O(log(n))
+
+let binarySearch = function (arr, x, start, end) {
+    // Base Condition
+    if (start > end) {
+        // IF not found, return the lower index of end
+        arr.push(arr[end]);
+        return end
+    };
+    // Find the middle index
+    let i = Math.floor((start + end) / 2);
+
+    if (arr[i] === x) {
+        // return the index of where target was found
+        arr.push(arr[i]);
+        return i;
+    }
+
+    // If element at i is greater than x,
+    // search in the left half of i
+    if (arr[i] > x) {
+        return binarySearch(arr, x, start, i - 1);
+    } else {
+        // If element at i is smaller than x,
+        // search in the right half of i
+        return binarySearch(arr, x, i + 1, end);
+    }
+}
+// console.log(binarySearch([0,1,2,3,4,6], 5, 0, 6));
+let findKClosestEleWithBi = function (arr, k, x) {
+    let results = [];
+
+    let i = binarySearch(arr, x, 0, arr.length - 1);
+    console.log(i);
+    let j = i - 1;
+    let y = i + 1;
+    while (results.length < k) {
+        if (arr[y] === undefined) {
+            results.push(arr[j]);
+            j--;
+
+        } else if (arr[j] === undefined) {
+            results.push(arr[y]);
+            y++;
+
+        } else {
+            let jDiff = Math.abs(arr[i] - arr[j]);
+            let kDiff = Math.abs(arr[i] - arr[y]);
+            if (jDiff <= kDiff) {
+                results.push(arr[j]);
+                j--;
+            } else {
+                results.push(arr[y]);
+                y++;
+            }
+        }
+    }
+    return results;
+}
+// console.log(findKClosestEleWithBi([1,4,6,17,20], 3, 5)); // [1,4,6]
+// console.log(findKClosestEleWithBi([1,4,6,17,20], 3, 20)); // [6,17,20]
+console.log(findKClosestEleWithBi([1,4,6,17,20], 3, 18)); // [6,17,20]
