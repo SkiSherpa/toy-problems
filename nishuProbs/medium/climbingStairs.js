@@ -83,7 +83,9 @@ let countSteps = function(n, prevVals = []) {
     if (prevVals[n] != null) {
         return prevVals[n];
     }
-    let result
+
+    let result;
+
     if (n === 0) {
         return 1;
     } else if (n < 0) {
