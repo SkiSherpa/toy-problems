@@ -81,9 +81,9 @@ var _longestPalindrome = function(s) {
     return longest;
 };
 
-console.log(longestPalindrome("babad"), "bab");
-console.log(longestPalindrome("cbbs"), "bb");
-console.log(longestPalindrome("ss"), "ss"); // test 82/142
+// console.log(longestPalindrome("babad"), "bab");
+// console.log(longestPalindrome("cbbs"), "bb");
+// console.log(longestPalindrome("ss"), "ss"); // test 82/142
 // tests are taking too long to pass, but passes all 142
 // maybe a memoize thing - after starting to implement this, using a map,
     // you can do something like, map.set((0, 2), s.substring(0, 2)
@@ -95,5 +95,59 @@ console.log(longestPalindrome("ss"), "ss"); // test 82/142
 I think a different approach is needed. Looked at solutions
 
 NEW APPROACH
-
+ODD case:
+Move a pointer along to the string
+Loop to move center char up by one index
+    Loop to move left and right pointers
+        IF the left and right char don't match move to next char
+        OTHERWISE, IF left and right chars do match
+            IF length of current substring > longest
+                set longest to current substring
+EVEN case:
+The same but two center pointers
 */
+/* ex1: aba
+the while loop in expandAroundCenter will stop when left = -1 & right = 3
+The lenght of palin is 3, but 3 - (-1) = 4, so right - left - 1, give correct length
+
+absbd -> terminates at 0, 4 -> 4 - 0 - 1 = 3
+*/
+var longestPalindrome = function(s) {
+    if (!s) {
+        return s;
+    }
+    function expandAroundCenter(s, left, right) {
+        while (left >= 0 && right < s.length && s[left] === s[right]) {
+            left--;
+            right++;
+        }
+        // return the length
+        // when len is returned, left and right will have gone one more iteration
+        // than when we want it to stop - look at ex1 at top
+        return right - left - 1;
+    }
+
+    let start = 0;
+    let end = 0;
+
+    for (let i = 0; i < s.length; i++) {
+        const odd = expandAroundCenter(s, i, i);
+        const even = expandAroundCenter(s, i, i + 1);
+        const maxLen = Math.max(odd, even);
+
+        if (maxLen > end - start) {
+            start = i - Math.floor((maxLen - 1) / 2);
+            end = i + Math.floor(maxLen / 2);
+        }
+    }
+    return s.substring(start, end + 1);
+}
+console.log(longestPalindrome("babad"), "bab");
+// with each iteration of the for loop
+// a new maxLen will be generated,
+// then can be compared to the start and end vars outside the for loop
+// IF the new maxLen is a bigger num than (end - start), then a new start and end should be assigned
+
+// t = O(n^2), where n is the length of s.
+// m = O(1), it seems constant to me
+// t = 60ms 98.30%, m = 49.99MB 47.71%
