@@ -43,11 +43,15 @@ s consist of only digits and English letters.
         // moving "end" up by one
     // move start up by one
 
-var longestPalindrome = function(s) {
+var _longestPalindrome = function(s) {
     if (s.length === 1) {
         return s;
     }
-    let isPalindrome = function(subString) {
+    let cache = new Map();
+    let isPalindrome = function(subString, start, end, cache) {
+        if (cache[(start, end)]) {
+            return cache[(start, end)];
+        }
         let i = 0;
         let j = subString.length - 1;
         while (i < j) {
@@ -57,6 +61,7 @@ var longestPalindrome = function(s) {
             i++;
             j--;
         }
+        cache.set((start, end), true);
         return true;
     }
     let longest = '';
@@ -66,7 +71,7 @@ var longestPalindrome = function(s) {
     while (start < end) {
         end = start + 1;
         while (end <= s.length) {
-            if (isPalindrome(s.substring(start, end)) && s.substring(start, end).length > longest.length) {
+            if (isPalindrome(s.substring(start, end), start, end, cache) && s.substring(start, end).length > longest.length) {
                 longest = s.substring(start, end)
             }
             end++;
@@ -76,8 +81,8 @@ var longestPalindrome = function(s) {
     return longest;
 };
 
-// console.log(longestPalindrome("babad"), "bab");
-// console.log(longestPalindrome("cbbs"), "bb");
+console.log(longestPalindrome("babad"), "bab");
+console.log(longestPalindrome("cbbs"), "bb");
 console.log(longestPalindrome("ss"), "ss"); // test 82/142
 // tests are taking too long to pass, but passes all 142
 // maybe a memoize thing - after starting to implement this, using a map,
@@ -86,3 +91,9 @@ console.log(longestPalindrome("ss"), "ss"); // test 82/142
 
 // t = n^3, the isPalindrome is a nested O(n), making a triple nest while, where each is O(n)
 // m = O(1),
+/* Adding in the cache didn't improve the runtime
+I think a different approach is needed. Looked at solutions
+
+NEW APPROACH
+
+*/
