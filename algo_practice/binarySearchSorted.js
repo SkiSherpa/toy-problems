@@ -4,18 +4,18 @@ function binarySearch(arr, target) {
 
     while (low <= high) {
       const mid = Math.floor((low + high) / 2);
-        console.log("low, ", low, "high: ", high, "mid: ", mid, "val: ", arr[mid]);
+        // console.log("low, ", low, "high: ", high, "mid: ", mid, "val: ", arr[mid]);
 
         if (arr[mid] === target) {
-        return mid; // Return the index if the target is found
+          return mid; // Return the index if the target is found
       } else if (arr[mid] < target) {
-        console.log(arr[mid], " < ", target);
-        console.log("new low")
-        low = mid + 1;
+        // console.log(arr[mid], " < ", target);
+        // console.log("new low")
+          low = mid + 1;
       } else {
-        console.log(arr[mid], " > ", target);
-        console.log("new high")
-        high = mid - 1;
+        // console.log(arr[mid], " > ", target);
+        // console.log("new high")
+          high = mid - 1;
       }
     }
 
