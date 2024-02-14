@@ -61,7 +61,7 @@ OTHERwsie j+1 is water, check cell below
         Then do i-1 to go back to og row, and move to j+1 cell which should be water, set flag to isCurWater = true
 
 */
-var numIslands = function(grid) {
+var _numIslands = function(grid) {
     // determine if first item is water
     let isCurWater = grid[0][0] === "0" ? true : false;
     console.log("false", isCurWater);
@@ -87,10 +87,68 @@ var numIslands = function(grid) {
     return islands
 };
 // Out of time. THis would give me two islands though for the ex below:
-console.log(numIslands([
-    ["1","1","1","1","0"],
-    ["1","1","0","1","0"],
-    ["1","1","0","0","0"],
-    ["0","0","0","0","0"]
-  ]));
+
 //   lets check and see: it gave me zero. I must not of implemented correctly.
+var numIslands = function(grid) {
+    if (!grid || grid.length === 0) {
+        return 0;
+    }
+
+    const rowLen = grid.length;
+    const colLen = grid[0].length;
+
+    let count = 0;
+
+    const dfs = (i, j) => {
+        if (i < 0 || i >= rowLen || j < 0 || j >= colLen || grid[i][j] === '0') {
+            return;
+        }
+
+        grid[i][j] = '0'; // Mark the current cell as visited
+
+        // Explore neighbors in all four directions
+        // IF its a 1, then it goes to the next cell
+        // IF 0, it returns nothing
+        dfs(i + 1, j); // 00,... 0,4 is a zero, return, 01 - 03 have been tf to 0's
+        dfs(i - 1, j);
+        dfs(i, j + 1);
+        dfs(i, j - 1);
+    };
+
+    // Iterate through each cell in the grid
+    for (let i = 0; i < rowLen; i++) {
+        for (let j = 0; j < colLen; j++) {
+            console.log(i, j, grid);
+            if (grid[i][j] === '1') {
+                count++;
+                dfs(i, j);
+                console.log("=", i, j, grid);
+            }
+        }
+    }
+
+    return count;
+};
+
+// Example usage:
+const grid1 = [
+  ["1","1","1","1","0"],
+  ["1","1","0","1","0"],
+  ["1","1","0","0","0"],
+  ["0","0","0","0","0"]
+];
+
+const grid2 = [
+  ["1","1","0","0","0"],
+  ["1","1","0","0","0"],
+  ["0","0","1","0","0"],
+  ["0","0","0","1","1"]
+];
+
+// console.log(numIslands(grid1)); // Output: 1
+// console.log("    ");
+console.log(numIslands(grid2)); // Output: 3
+// It does go through every cell.
+
+// t = power n^2 < t < n^3
+// m = O(1)
