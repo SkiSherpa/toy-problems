@@ -53,7 +53,7 @@ word consists of lowercase English letters only.
 
     // at end, slice off index zero letter and start again
 
-var countVowelSubstrings = function(word) {
+var _countVowelSubstrings = function(word) {
     if (word.length < 5) {
         return 0;
     }
@@ -112,6 +112,26 @@ var countVowelSubstrings = function(word) {
     }
     return count;
 };
+
+const countVowelSubstrings = word => {
+    const vowels = new Set(['a', 'e', 'i', 'o', 'u']);
+    const set = new Set();
+    let count = 0;
+
+    for (let i = 0; i < word.length; i += 1) {
+      set.clear();
+
+      for (let j = 0; j + i < word.length && vowels.has(word[j + i]); j += 1) {
+        set.add(word[i + j]);
+
+        if (set.size === vowels.size) {
+          count += 1;
+        }
+      }
+    }
+
+    return count;
+  };
 
 // console.log(countVowelSubstrings("bbaeixoubb"), 0);
 console.log(countVowelSubstrings("cuaieuouac"), 7);
