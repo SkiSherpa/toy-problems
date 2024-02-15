@@ -45,3 +45,5 @@ var findDuplicate = function(nums) {
 // t = O(n), n is length of nums
 // m = O(n), n is length of nums,
 // it passes all the tests and answer is accepted
+
+// my solution matches the ones on leetcode
