@@ -119,15 +119,17 @@ const countVowelSubstrings = word => {
     let count = 0;
 
     for (let i = 0; i < word.length; i += 1) {
-      set.clear();
-
-      for (let j = 0; j + i < word.length && vowels.has(word[j + i]); j += 1) {
-        set.add(word[i + j]);
-
-        if (set.size === vowels.size) {
-          count += 1;
+        console.log("outer word[i]", word[i]);
+        set.clear();
+        // vowels.has(word[j + i]) - checking if cur is a vowel from vowels set
+        for (let j = 0; j + i < word.length && vowels.has(word[j + i]); j += 1) {
+            console.log(set);
+            set.add(word[i + j]);
+            console.log('set.size', set);
+            if (set.size === vowels.size) {
+            count += 1;
+            }
         }
-      }
     }
 
     return count;
