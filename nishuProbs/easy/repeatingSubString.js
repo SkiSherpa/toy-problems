@@ -52,9 +52,16 @@ Go until you divide by (len of s)/2
 return false
 */
 var repeatedSubstringPattern = function(s) {
+    if (s.length === 2) {
+        if (s[0] === s[1]) {
+            return true;
+        }
+        return false;
+    }
+
     let len = Math.floor(s.length / 2);
-    console.log(len);
-    for (let i = 2; i <= len; i++) {
+
+    for (let i = 1; i <= len; i++) {
         if (s.length % i === 0) {
             let times = s.length / i;
             let curSlice = s.slice(0, i);
@@ -72,3 +79,12 @@ var repeatedSubstringPattern = function(s) {
 };
 // let lice = 'ab';
 console.log(repeatedSubstringPattern("abab"), true);
+console.log(repeatedSubstringPattern("zzz"), true);
+//  t = O(log(n)), you only go through 1/2 of n, and you don't hit every number
+// I'm doing a closest curve fit with the guess of log(n)
+// I guess the nested loops, even though your skipping is still n^2
+// O(n/2) * O(n/i) = n^2 / 2i
+//  ans = t O(n^2)
+// the concat would add time too
+
+// m = O(m+n), because of the concat

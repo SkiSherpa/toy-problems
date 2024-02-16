@@ -36,11 +36,16 @@ let isValid = function (newS) {
     // }
 
     let stack = [];
-
+    /* let closing = new Set (')', ']', '}') */
     for (let i = 0; i < newS.length; i++) {
         if (stack.length === 0 && [')', ']', '}'].includes(newS[i])) {
             return false;
         }
+        /*
+        if (closing.has(newS[i]) && stack.length === 0 ) {
+            return false;
+        }
+        */
         if (['(', '[', '{'].includes(newS[i])) {
             stack.push(newS[i]);
         } else {
