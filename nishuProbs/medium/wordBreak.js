@@ -80,7 +80,8 @@ var _wordBreak = function(s, wordDict) {
 // console.log(test.indexOf(testDict[0]));
 var wordBreak = function(s, wordDict) {
     const words = new Set(wordDict);
-    const wordLens = new Set(wordDict.map((word) => word.length))
+    const wordLens = new Set(wordDict.map((word) => word.length)) // wordLens is a set of numbers
+    console.log('wordLens after map', [...wordLens]);
     const starts = new Set([0])
     for (let start of starts) {
         console.log("starts", starts);
@@ -95,10 +96,10 @@ var wordBreak = function(s, wordDict) {
     return starts.has(s.length)
 };
 
-console.log(wordBreak("leetcode", ["leet","code"]), true);
+// console.log(wordBreak("leetcode", ["leet","code"]), true);
 let s1 = "catsandog";
 let wordDict1 = ["cats","dog","sand","and","cat"];
 // console.log(wordBreak(s1, wordDict1), false);
 let s2 = "cars";
 let wd2 = ["car","ca","rs"];
-// console.log(wordBreak(s2, wd2), true); // this breaks my solution
+console.log(wordBreak(s2, wd2), true); // this breaks my solution
