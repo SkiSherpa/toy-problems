@@ -32,4 +32,6 @@ Just return WITH A ; is the fastest.
 It's also interesting that CONST is slower than LET.
 A num that shouldn't change seems like something CONST is designed for. LET I'd assume is supposed to be an all around tool, which usually less effiencent. Maybe the checks to keep CONST constant slows things down a bit, where LET may not have those restrictions.
 
+
+adding stuff
 */
