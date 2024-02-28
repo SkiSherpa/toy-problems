@@ -47,4 +47,8 @@ console.log(reverseWords("s'teL ekat edoCteeL tsetnoc"
 ), " - ", "Let's take LeetCode contest");
 
 // multiple spaces were not an issue, passed all tests
-// t =
+// first loop & 2nd loop together go through every char
+    // then concat is n+m
+// n*(n+m) = n^2 + n*m
+// t = O(n^2), where n is the char length of s
+// m = O(n), where n is the the number of words  in s.
