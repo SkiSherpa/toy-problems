@@ -129,14 +129,91 @@ var __subarraySum = function(nums, k) {
     return count;
 }
 
-
+// still not passing all tests, but may take some tinkering...
 var subarraySum = function (nums, k) {
+    const len = nums.length;
+    if (len === 0) {
+        return 0;
+    }
+    // {prefixSum : occurance of prefixSum}
+    let myMap = new Map();
+    // I thnk a 0: 1, is added to map for first find of sums == k
+    // b/c on i = 1, 3+4 = 7 = currSum
+    // so currSum - k = 7 - 7 = 0, with 0:1 in map,
+    let i = 0;
+    let currSum = 0;
+    let count = 0;
+     while (i < len) {
 
+        currSum += nums[i]
+        // found new subarray with sum == k, the first time
+        // it wont exist in the map
+        if (currSum === k) {
+            count++;
+        }
+        // IF currSum - k equals a key in map, it already exists
+            // add one to occurance of that sum
+            // make count go up by one
+        // otherwise, add prefixSum to map and make occurance 1
+        // 20 -7 = 13
+        let prefixSum = currSum - k
+        if (myMap.get(prefixSum)) {
+            myMap.set(currSum, myMap.get(currSum) + 1);
+            count++;
+        } else {
+            myMap.set(currSum, 1);
+        }
+
+        // increase i by one
+        i++;
+     }
+     return count;
 }
-
+/*
+ SOL Video, goes through 3 ways, the final,
+ fastest way using a cache + map starts at 12:00
+ The 1st/2nd method lay the foundation for how it works
+*/
 // console.log(subarraySum([1,2,3], 3), 2);
 // console.log(subarraySum([1,1,1], 2), 2);
 // console.log(subarraySum([1], 0), 0);
 // console.log(subarraySum([-1, -1, 1], 0), 1);
 // [3, 4,  7,  2, -3,  1,  4,  2]
 console.log(subarraySum([3, 4,  7,  2, -3,  1,  4,  2], 7), 4);
+// [3,4], [7], [7,2,-3,1], [1,4,2]
+console.log(subarraySum([1,-1,1,1,1,1], 3), 3);
+console.log(subarraySum([1,2,1,2,1], 3), 4); // 37/93
+
+// currSum - k = IF there exist a prefixSum that come before
+    // then count goes up
+// -> [3,4,7]
+// currSum = 14, k = 7
+// prefixSum at 7, is 3+4 = 7
+// So count would go up by one
+
+// count = 0
+// IF currSum == k
+    // count++
+// IF (myMap.find(currSum - k))
+    // count += myMap[currSum - k]
+/* myMap = {
+    sum: count
+    3   : 1
+    7   : 1 -> count = 1
+    14  : 1 -> count = 2
+    16  : 1
+    13  : 1
+---- 14 already exist in map, so its count will go up by one
+will make new map obj
+}
+myMap = {
+    sum: count
+    3   : 1
+    7   : 1
+    14  : 2 -> count = 3
+    16  : 1
+    13  : 1
+    18  : 1
+    20  : 1 -> but 20 - 7 = 13, which is present in the map
+            -> count = 4
+*/
