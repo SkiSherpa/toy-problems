@@ -137,9 +137,7 @@ var subarraySum = function (nums, k) {
     }
     // {prefixSum : occurance of prefixSum}
     let myMap = new Map();
-    // I thnk a 0: 1, is added to map for first find of sums == k
-    // b/c on i = 1, 3+4 = 7 = currSum
-    // so currSum - k = 7 - 7 = 0, with 0:1 in map,
+
     let i = 0;
     let currSum = 0;
     let count = 0;
@@ -153,38 +151,48 @@ var subarraySum = function (nums, k) {
         }
         // IF currSum - k equals a key in map, it already exists
             // add one to occurance of that sum
-            // make count go up by one
-        // otherwise, add prefixSum to map and make occurance 1
-        // 20 -7 = 13
+
+
         let prefixSum = currSum - k
-        if (myMap.get(prefixSum)) {
-            myMap.set(currSum, myMap.get(currSum) + 1);
+        if (myMap.has(prefixSum)) {
             count += myMap.get(prefixSum);
+            // console.log(myMap, 'prefixSum', prefixSum, 'currSum', currSum);
         }
-        // why is this not an else?
-        myMap.set(currSum, 1);
+        // IF we can get the occurence of the prefixSum in myMap
+            // add one to the occurance of that prefixSum
+
+        myMap.set(currSum, (myMap.get(currSum) || 0) + 1);
+        // (myMap.get(currSum) || 0) IF currSum is zero (a falsy), it won't be stored cause .get will return undefined, when that happens the || 0 will set it as zero.
 
         // increase i by one
         i++;
      }
      return count;
 }
+
+// t = O(n), where n is the length of nums array
+// m = O(n), where n is the length of nums array. For the myMap that is stored + some extra vars that remain constant
+
+
 /*
  SOL Video, goes through 3 ways, the final,
  fastest way using a cache + map starts at 12:00
  The 1st/2nd method lay the foundation for how it works
  https://www.youtube.com/watch?v=HbbYPQc-Oo4&ab_channel=Techdose
 */
-// console.log(subarraySum([1,2,3], 3), 2);
-// console.log(subarraySum([1,1,1], 2), 2);
+console.log(subarraySum([1,2,3], 3), 2);
+console.log(subarraySum([1,1,1], 2), 2);
 // console.log(subarraySum([1], 0), 0);
 // console.log(subarraySum([-1, -1, 1], 0), 1);
 // [3, 4,  7,  2, -3,  1,  4,  2]
-console.log(subarraySum([3, 4,  7,  2, -3,  1,  4,  2], 7), 4);
+// console.log(subarraySum([3, 4,  7,  2, -3,  1,  4,  2], 7), 4);
 // [3,4], [7], [7,2,-3,1], [1,4,2]
-console.log(subarraySum([1,-1,1,1,1,1], 3), 3);
-console.log(subarraySum([1,2,1,2,1], 3), 4); // 37/93
-console.log(subarraySum([-1,-1,1], 0), 1);
+// console.log(subarraySum([1,-1,1,1,1,1], 3), 3);
+// console.log(subarraySum([1,2,1,2,1], 3), 4); // 37/93
+// console.log(subarraySum([-1,-1,1], 0), 1);
+console.log(subarraySum([0,0,0,0,0,0,0,0,0,0], 0), 55); //70/93
+
+
 // currSum - k = IF there exist a prefixSum that come before
     // then count goes up
 // -> [3,4,7]
