@@ -159,10 +159,10 @@ var subarraySum = function (nums, k) {
         let prefixSum = currSum - k
         if (myMap.get(prefixSum)) {
             myMap.set(currSum, myMap.get(currSum) + 1);
-            count++;
-        } else {
-            myMap.set(currSum, 1);
+            count += myMap.get(prefixSum);
         }
+        // why is this not an else?
+        myMap.set(currSum, 1);
 
         // increase i by one
         i++;
@@ -173,6 +173,7 @@ var subarraySum = function (nums, k) {
  SOL Video, goes through 3 ways, the final,
  fastest way using a cache + map starts at 12:00
  The 1st/2nd method lay the foundation for how it works
+ https://www.youtube.com/watch?v=HbbYPQc-Oo4&ab_channel=Techdose
 */
 // console.log(subarraySum([1,2,3], 3), 2);
 // console.log(subarraySum([1,1,1], 2), 2);
@@ -183,7 +184,7 @@ console.log(subarraySum([3, 4,  7,  2, -3,  1,  4,  2], 7), 4);
 // [3,4], [7], [7,2,-3,1], [1,4,2]
 console.log(subarraySum([1,-1,1,1,1,1], 3), 3);
 console.log(subarraySum([1,2,1,2,1], 3), 4); // 37/93
-
+console.log(subarraySum([-1,-1,1], 0), 1);
 // currSum - k = IF there exist a prefixSum that come before
     // then count goes up
 // -> [3,4,7]
