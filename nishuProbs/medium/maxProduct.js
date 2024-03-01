@@ -26,7 +26,22 @@ The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit int
  * @param {number[]} nums
  * @return {number}
  */
-// before dooing this one I should understand how the sum k subarray problem works, cause I'm pretty sure its similar sol.
+// [2,3,-2,4]
+// product [2, 6, -12, -48]
+// [-1, -2, 3, 4] -> 12
+
+// IP: an array of nums
+// OP: a number - the largest product from subarray
+
+// create a map, with {prefixProduct: occurence of that prefix}
+// create lastProduct = 1, largestProduct = undefined;
+
+// loop through nums
+    // currProduct = multiply lastProduct times nums[i]
+    // If currProduct > largestProduct
+        // reasign largestProduct
+    // IF currProduct
+
 var maxProduct = function(nums) {
 
 };
