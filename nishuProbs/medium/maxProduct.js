@@ -33,14 +33,7 @@ The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit int
 // IP: an array of nums
 // OP: a number - the largest product from subarray
 
-// create a map, with {prefixProduct: occurence of that prefix}
-// create lastProduct = 1, largestProduct = undefined;
 
-// loop through nums
-    // currProduct = multiply lastProduct times nums[i]
-    // If currProduct > largestProduct
-        // reasign largestProduct
-    // IF currProduct
 
 var maxProduct = function(nums) {
 
