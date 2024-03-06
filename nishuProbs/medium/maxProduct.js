@@ -33,8 +33,97 @@ The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit int
 // IP: an array of nums
 // OP: a number - the largest product from subarray
 
+// [1, 2, 3, - 1, 2, 1, - 1, 3, - 1 6]
+// [1, - 1, 2, 2, - 1, 1, - 1, 2, 3, 2, - 1, 2, 3, -1 ]
+/*
+1. EVEN number of negs
+    multiply ever number
+2. ODD number of negs
+    you cant use the middle neg to take away, both sides will = neg
+        if there are 3, 7, 11... neg numbers
+    you can use the middle neg if odd number count is 5, 9, 13...
 
+    you look at arrs in front / back of first or last neg number
+3. if there is a zero in nums, everything is zero
+4. OBVI case, no zeros or neg number, multiply everything
 
+create negIndex array
+Loop through nums
+    IF the current num is zero, return zero
+    IF the current num is negative, save current INDEX to array
+
+Determine if number of negs are EVEN
+    Multiply all numbers in nums together
+
+    x = 3 + 5*n
+    x+3 / 5 = numbner of negs, cant use middle index for neg
+create largest product var = 1
+2. IF (number of neg)+3 / 5 equals a whole number
+    CANT use middle indexed to take arway
+        multiply from zero to first neg index
+        mult from one after first neg index to end
+        You do this ^^ for each neg index, except the middle one
+    Otherwise you can use middle index to take away
+*/
 var maxProduct = function(nums) {
+    if (nums.length === 1) {
+        return nums[0];
+    }
+    // get arr of negative number indexes and if a zero is present
+    let negIndexes = [];
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] === 0) {
+            return 0;
+        }
+        if (nums[i] < 0) {
+            negIndexes.push(i);
+        }
+    }
 
+    let largestProduct = 1;
+    let lenOfNegs = negIndexes.length;
+
+    // all positive nums:
+    if (lenOfNegs === 0) {
+        for (let i = 0; i < nums.length; i++) {
+            largestProduct *= nums[i];
+        }
+    }
+
+    // neg nums are present
+    if (lenOfNegs % 2 === 0) {
+        for (let j = 0; j < lenOfNegs; j++) {
+            largestProduct *= nums[j];
+        }
+    }
+    // [1, 2, 3, -1, 2, 1, -1, 3, -1, 6] = 32
+    // get product of (0, first neg i)
+    // (first neg i+1, end)
+    for (let curIndex in negIndexes) {
+        let left = nums.slice(0, negIndexes[curIndex]);
+        let right = nums.slice(negIndexes[curIndex+1], lenOfNegs - 1);
+        let leftProduct = 1;
+        let rightProduct = 1;
+        console.log(nums, left, right, curIndex);
+        for (let l = 0; l < left.length; l++) {
+            leftProduct *= left[l];
+        }
+        for (let r = 0; r < right.length; r++) {
+            rightProduct *= right[r];
+        }
+        if (largestProduct < leftProduct) {
+            largestProduct = leftProduct;
+        }
+        if (largestProduct < rightProduct) {
+            largestProduct = rightProduct;
+        }
+        console.log(curIndex, largestProduct)
+    }
+
+    return largestProduct;
 };
+
+// console.log(maxProduct([1, 2, 3, -1, 2, 1, -1, 3, -1, 6]), 36);
+// [3,5,8]
+// console.log(maxProduct([2,3]), 6); // 44/190
+console.log(maxProduct([0,2]), 0); // 48/190
