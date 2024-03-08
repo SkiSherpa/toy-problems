@@ -1,5 +1,5 @@
 /**
- * https://leetcode.com/problems/pascals-triangle-ii/description/
+ * https://leetcode.com/problems/pascals-triangle-ii/description/cd
 Given an integer rowIndex, return the rowIndexth (0-indexed) row of the Pascal's triangle.
 
 In Pascal's triangle, each number is the sum of the two numbers directly above it as shown:
@@ -27,12 +27,16 @@ Constraints:
 // IP: a number - target rowIndex
 // OP: array of nums - values of the target rowIndex
 
-// 0 = [1]
-// 1 = [1,1]
-// save previous row
-// use prev row to calc next row
+// getNextRow while loop to build next row pass in current row and rowIndex (to constantly minus one)
+    // create arr at one length longer that preRow
+        // add 1s to beginning and end of newTow
+        // loop through to calc remaining rows
+            // [0,1,2]
+            // [0,1,2,3]
 
-
+            // [0,1,2,3]
+            // [0,1,2,3,4]
+        // set prevRow to newRow
 var getRow = function(rowIndex) {
     if (rowIndex === 0) {
         return [1];
@@ -41,26 +45,27 @@ var getRow = function(rowIndex) {
         return [1,1];
     }
 
-    let row = [1,1];
-    // create a new row that is one length longer than argu row
-    // [1, ..., 1]
-    // take prev row
-    // formula to calc which i from argue row
-    // loop to cal next values
-        // push into arr
+    let prevRow = [1,1];
+    let newRow = [];
+    let curRowNum = 1;
 
-
-    function nextRow(prevRow) {
-        let arr = new Array(prevRow.length + 1);
-        arr[0] = 1;
-        arr[arr.length - 1] = 1;
-        for (let i = 1; i < arr.length; i++) {
-            let prevIndex = i - 0;
-            arr[i] = prevRow[i] + prevRow[prevIndex];
+    while (curRowNum < rowIndex) {
+        let newRowLen = prevRow.length + 1
+        newRow = new Array(newRowLen);
+        newRow[0] = 1;
+        newRow[newRowLen - 1] = 1;
+        for (let i = 1; i < newRowLen - 1; i++) {
+            newRow[i] = prevRow[i - 1] + prevRow[i];
         }
-        return arr;
+        prevRow = newRow;
+        curRowNum++;
     }
-    return nextRow(row);
+    return newRow;
 };
 
-console.log(getRow(4));
+console.log(getRow(4)); // [1,4,6,4,1]
+console.log(getRow(3)); // [1,3,3,1]
+// t = O(n), where n is rowIndex number
+// m = O(n), where n is scaling with rowIndex number
+
+// t = 64ms 6.69% | m = 49.30MB 14.90%
