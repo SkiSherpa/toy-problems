@@ -158,31 +158,71 @@ const t = [
         [6,7,8],
         [9,0,1]
     ]
+    // loop through IP
+        // loop through each item
+            // IF current is less than 0
+                // return true
     const isNegIn2nd = (t) => {
-
+        for (let i = 0; i < t.length; i++) {
+            for (let j = 0; j < t[i].length; j++) {
+                if (t[i][j] < 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
-    console.log(isNegIn2nd(t), false);
-    console.log(isNegIn2nd(yesNeg), true);
+    // console.log(isNegIn2nd(t), false);
+    // console.log(isNegIn2nd(yesNeg), true);
 // 8 What are the sum of all values in the topmost row?
+    // loop through top row
+        // add each item to sum
     const topRowSum = (t) => {
-
+        let sum = 0;
+        let topRow = t[0];
+        for (let j = 0; j < topRow.length; j++) {
+            sum += topRow[j];
+        }
+        return sum;
     }
-    console.log(topRowSum(t), 3);
-// 9 What is the product of all values in the bottommost row?
-    const bottomRowProduct = () => {
+    // console.log(topRowSum(t), 3);
 
+// 9 What is the product of all values in the bottommost row?
+    // loop through bottom row
+        // add each item to sum
+    const bottomRowProduct = (t) => {
+        let product = 1;
+        let bottomRow = t[t.length - 1];
+        for (let j = 0; j < bottomRow.length; j++) {
+            product *= bottomRow[j];
+        }
+        return product;
     }
     console.log(bottomRowProduct(t), 0);
+
 // 10 What is the sum of all values in the rightmost column?
+    // loop through t
+        // add the last item from current to sum
     const rightColSum = (t) => {
-
+        let sum = 0;
+        for (let i = 0; i < t.length; i++) {
+            let len = t[i].length - 1;
+            sum += t[i][len];
+        }
+        return sum;
     }
-    console.log(rightColSum(t), 2+5+8+1);
+    // console.log(rightColSum(t), 2+5+8+1);
 // 11 What is the product of all values in the leftmost column?
-    const leftColSum = (t) => {
-
+    // loop through t
+        // multiply current to product
+    const leftColProduct = (t) => {
+        let product = 1;
+        for (let i = 0; i < t.length; i++) {
+            product *= t[i][0];
+        }
+        return product;
     }
-    console.log(leftColSum(t), 0+3+6+9);
+    // console.log(leftColProduct(t), 0*3*6*9);
 // 12 Are there any positive values along the diagonal from top left to bottom right? (If n and m are not the same, then pretend that the larger of the two is equal to the smaller of the two, ignoring the later row(s) or column(s))
 
 // 13 What is the sum of all values along the diagonal from the top right to bottom left?
