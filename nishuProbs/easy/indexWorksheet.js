@@ -82,8 +82,74 @@ const t = [
         }
         return sum;
     }
-    console.log(thirdRowSum(t), 6+7+8);
+    // console.log(thirdRowSum(t), 6+7+8);
 // * Verify that the input is in fact an nxm matrix of numbers and report what n and m are, n=4, m=3
+    // n = num of items in each rows,
+    // m = num of rows
+    // to verify would be same number of items in each row
+
+    // that t is an array - assuming that t is an nxm array of arrays matrix
+    // that each item in t is an array
+
+    // IP: a nxm matrix
+    // OP: bool - true if IP is a nxm matrix
+    // IF matrix is an array
+        // IF each row in matrix is NOT an array
+            // return false
+        // IF each row is NOT the same length;
+            // return false
+    // otherwise IF an obj
+        // IF each value is an array and are the same length
+    // return false
+
+    let isNxM = (matrix) => {
+        if (Array.isArray(matrix)) {
+            // keep len in IF statements incase IP has no first subarray
+            const len = matrix[0].length;
+            for (let i = 0; i < matrix.length; i++) {
+                // is each row an array
+                if (!Array.isArray(matrix[i])) {
+                    return false;
+                }
+                // if each row is the same length
+                if (len !== matrix[i].length) {
+                    return false
+                }
+            }
+            return true;
+        } else if (typeof matrix === 'object') { // if IP is an obj
+            let lenInObj = matrix[Object.keys(matrix)[0]].length;
+            for (let key in matrix) {
+                if (!Array.isArray(matrix[key])) {
+                    return false;
+                }
+                if (lenInObj !== matrix[key].length) {
+                    return false
+                }
+            }
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+    const tObj = {
+        '0': [0,1,2],
+        '1': [3,4,5],
+        '2': [6,7,8],
+        '3': [9,0,1],
+    }
+    const notNxM = [[1,2,3], [1,2,3,4], [1,2,3]];
+    const notNxMObj = {
+        0: [0,1,2],
+        1: [3,4,5],
+        2: [6,7,8,0],
+        3: [9,0,1]
+    }
+    // console.log(isNxM(t), true);
+    // console.log(isNxM(tObj), true);
+    // console.log(isNxM(notNxM), false);
+    // console.log(isNxM(notNxMObj), false);
 
 // * Are there any negative values in the 2nd row?
 // * What are the sum of all values in the topmost row?
