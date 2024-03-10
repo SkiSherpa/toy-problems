@@ -152,15 +152,16 @@ var isValidSudoku = function(board) {
 
     return true;
 };
+
+// t = O(1), cause the board is always a 9x9
+
 // 0,0  0,1  0,2
 // 1,0  1,1  1,2  -> x, y+3  -> x, y + 6
 // 2,0  2,1  2,2
 
 // x+3, y
 
-// 0,6  0,7  0,8
-// 1,6  1,7  1,8
-// 2,6  2,7  2,8
+
 
 const single =
 [['1', '2', '3']
