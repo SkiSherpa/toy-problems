@@ -198,7 +198,7 @@ const t = [
         }
         return product;
     }
-    console.log(bottomRowProduct(t), 0);
+    // console.log(bottomRowProduct(t), 0);
 
 // 10 What is the sum of all values in the rightmost column?
     // loop through t
@@ -223,10 +223,57 @@ const t = [
         return product;
     }
     // console.log(leftColProduct(t), 0*3*6*9);
+/*
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [9,0,1]
+*/
+const diagNeg = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,-8],
+    [9,0,1]
+]
 // 12 Are there any positive values along the diagonal from top left to bottom right? (If n and m are not the same, then pretend that the larger of the two is equal to the smaller of the two, ignoring the later row(s) or column(s))
-
+    // if there are any pos vals - 0,4,8
+    // determine which is smaller n (num of rows) or m (num of items in each row)
+    // loop with i,j going up by one each time, looking for pos values
+    const isAllPosDiagnol = (t) => {
+        let n = t.length;
+        let m = t[0].length;
+        let len = n < m ? n : m;
+        let i = 0;
+        let j = 0;
+        while (i < len) {
+            if (t[i][j] < 0) {
+                return false;
+            }
+            i++;
+            j++;
+        }
+        return true;
+    }
+    // console.log(isAllPosDiagnol(t), true);
+    // console.log(isAllPosDiagnol(diagNeg), false);
+    // console.log(isAllPosDiagnol(yesNeg), true);
 // 13 What is the sum of all values along the diagonal from the top right to bottom left?
-
+    // start at i = 0, j = longest row length
+    // add one to i, and subract one from j
+    // sum up all vals
+    const sumTRtoBL = (t) => {
+        let len = t[0].length - 1;
+        let i = 0;
+        let j = t[0][len];
+        let sum = 0;
+        while (i <= len && j >= 0) {
+            sum += t[i][j];
+            i++;
+            j--;
+        }
+        return sum;
+    }
+    // console.log(sumTRtoBL(t), 12);
 // 14 Which row has the highest product of all its values?
 
 // 15 Which column has the highest product of all its values?
