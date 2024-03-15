@@ -275,5 +275,14 @@ const diagNeg = [
     }
     // console.log(sumTRtoBL(t), 12);
 // 14 Which row has the highest product of all its values?
+// - return the row index that is the highest or return the highest product?
+
+// ROW INDEX
+    // loop through each row
+        // find and save highest product with index
+    const biggestRowProduct = (t) => {
+
+    }
+// HIGHEST product
 
 // 15 Which column has the highest product of all its values?
