@@ -283,6 +283,10 @@ const diagNeg = [
     const biggestRowProduct = (t) => {
 
     }
+    console.log(biggestRowProduct)
 // HIGHEST product
+    const largestRowProductVal = (t) => {
+
+    }
 
 // 15 Which column has the highest product of all its values?
