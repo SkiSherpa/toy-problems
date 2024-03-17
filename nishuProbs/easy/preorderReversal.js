@@ -90,3 +90,23 @@ const node43 = new TreeNode(2);
 root4.left = node42;
 node42.right = node43;
 console.log(preorderTraversal(root4), [3,1,2]);
+
+// second version of the same prompt but the ordering of the return array is reversed
+// * https://leetcode.com/problems/binary-tree-postorder-traversal/submissions/1206644497/
+
+var postorderTraversal = function(root) {
+    if (!root) {
+        return [];
+    }
+    let values = [root.val];
+
+    function findVal (node, arr) {
+        if (!node) {
+            return arr;
+        }
+        arr.unshift(node.val);
+        return (findVal(node.right, arr) && findVal(node.left, arr));
+    }
+
+    return (findVal(root.right, values) && findVal(root.left, values));
+};
