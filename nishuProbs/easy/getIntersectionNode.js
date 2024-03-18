@@ -112,10 +112,41 @@ Since, they're the same you can return either a or b.
 The propt at the very begining says to return null, not zero or a string like in the examples. eventually the two list could be null if there is no intersection and that is what is returned
 */
 var getIntersectionNode = function(headA, headB) {
-    let a = headA, b = headB
+    let a = headA;
+    let b = headB;
         while (a !== b) {
             a = !a ? headB : a.next
             b = !b ? headA : b.next
         }
         return a
 }
+
+class LList {
+    constructor(val) {
+        this.val = val;
+        this.next = null;
+    }
+}
+
+const a1 = new LList(1);
+const a2 = new LList(2);
+const a3 = new LList(3);
+
+const b1 = new LList(1);
+const b2 = new LList(2);
+const b3 = new LList(3);
+
+const c4 = new LList(4);
+const c5 = new LList(5);
+
+a1.next = a2;
+a2.next = a3;
+a3.next = c4;
+
+b1.next = b2;
+b2.next = b3;
+b3.next = c4;
+c4.next = c5;
+
+console.log(getIntersectionNode(a1, b1));
+console.log(c4);
