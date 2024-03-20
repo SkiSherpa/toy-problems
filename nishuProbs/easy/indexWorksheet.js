@@ -274,19 +274,63 @@ const diagNeg = [
         return sum;
     }
     // console.log(sumTRtoBL(t), 12);
+
 // 14 Which row has the highest product of all its values?
 // - return the row index that is the highest or return the highest product?
 
 // ROW INDEX
+    // create a largestProduct = 0
+    // create a largestProductIndex = 0
     // loop through each row
         // find and save highest product with index
-    const biggestRowProduct = (t) => {
-
+    const biggestRowProductIndex = (t) => {
+        let largestProduct = 0;
+        let index = 0;
+        for (let i = 0; i < t.length; i++) {
+            let row = t[i];
+            let curProd = 1;
+            for (let j = 0; j < row.length; j++) {
+                curProd *= row[j];
+            }
+            if (curProd > largestProduct) {
+                largestProduct = curProd;
+                index = i;
+            }
+        }
+        return index;
     }
-    console.log(biggestRowProduct)
+    // console.log(biggestRowProductIndex(t), 2)
 // HIGHEST product
     const largestRowProductVal = (t) => {
+        let largestProduct = 0;
+        for (let i = 0; i < t.length; i++) {
+            let row = t[i];
+            let curProd = 1;
+            for (let j = 0; j < row.length; j++) {
+                curProd *= row[j];
+            }
+            if (curProd > largestProduct) {
+                largestProduct = curProd;
+            }
+        }
+        return largestProduct;
+    }
+    // console.log(largestRowProductVal(t), 6*7*8)
+// 15 Which column has the highest product of all its values?
+    // COL VALUE
+    const highestColProduct = (t) => {
 
     }
+    // console.log(highestColProduct(t), 2*5*8*1)
 
-// 15 Which column has the highest product of all its values?
+    // COL INDEX
+    const highestColProductIndex = (t) => {
+
+    }
+    // console.log(highestColProductIndex(t), 2);
+    /*
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [9,0,1]
+*/
