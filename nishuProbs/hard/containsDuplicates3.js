@@ -53,18 +53,20 @@ Return true if such pair exists or false otherwise.
 // retrurn false
 var containsNearbyAlmostDuplicate = function(nums, indexDiff, valueDiff) {
     let i = 0;
-    let j = indexDiff;
+    let j = 0;
     let len = nums.length;
-    while (i <= len - indexDiff) {
-        for (j; j < len; j++) {
-            console.log('Math.abs(nums[i] - nums[j])', Math.abs(nums[i] - nums[j]));
-            console.log(i, j, '|i-j|', Math.abs(i-j), '<= valDiff: ', valueDiff);
+    while (i <= len ) {
+        j = i+1;
+        while (j <= i + indexDiff) {
+            console.log('Math.abs(nums[i] - nums[j])', Math.abs(nums[i] - nums[j]), 'valueDiff', valueDiff);
+            console.log(i, j, '|i-j|', Math.abs(i-j), '<= indexDiff: ', indexDiff);
             if (Math.abs(nums[i] - nums[j]) <= valueDiff && Math.abs(i - j) <= indexDiff) {
                 return true;
             }
+            j++;
         }
         i++;
-        j = indexDiff + i;
+
     }
     return false;
 };
@@ -73,7 +75,8 @@ var containsNearbyAlmostDuplicate = function(nums, indexDiff, valueDiff) {
 const t2 = [1,5,9,1,5,9];
 const iD2 = 2;
 const vD2 = 3;
-// console.log(containsNearbyAlmostDuplicate(t2, iD2, vD2), false);
-console.log(containsNearbyAlmostDuplicate([1,2,2,3,4,5], 3, 0), true); //51 34/
-// I think this test case is incorrect ^^^
-// There's no value that can be |nums[i] - nums[j]| <= 0, when offset by 3 indicies.
+console.log(containsNearbyAlmostDuplicate(t2, iD2, vD2), false);
+// console.log(containsNearbyAlmostDuplicate([1,2,2,3,4,5], 3, 0), true); //51 34/
+// There's a test case where my sol times out.
+// nums goes from 1 to 10,000, in sequencial order.
+// seems like I need a dp approach
