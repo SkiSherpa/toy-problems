@@ -66,64 +66,120 @@ create largest product var = 1
     Otherwise you can use middle index to take away
 */
 var maxProduct = function(nums) {
+    // console.log('hi')
     if (nums.length === 1) {
         return nums[0];
     }
-    // get arr of negative number indexes and if a zero is present
-    let negIndexes = [];
+
+    // split up nums on the zeroes and place into an array
+    // check each array with code below
+
+    let subNums = [];
+    let tempNums = [];
+    let zeroFound = false;
+    // loop through nums
+        // IF current is a zero
+            // add tempNums to subNums
+            // reset tempNums back to empty arr
+        // OTHERWISE, push in current to tempNums
     for (let i = 0; i < nums.length; i++) {
         if (nums[i] === 0) {
-            return 0;
-        }
-        if (nums[i] < 0) {
-            negIndexes.push(i);
-        }
-    }
-
-    let largestProduct = 1;
-    let lenOfNegs = negIndexes.length;
-
-    // all positive nums:
-    if (lenOfNegs === 0) {
-        for (let i = 0; i < nums.length; i++) {
-            largestProduct *= nums[i];
+            subNums.push(tempNums);
+            tempNums = [];
+            zeroFound = true;
+        } else {
+            tempNums.push(nums[i]);
+            if (i === nums.length - 1) {
+                subNums.push(tempNums);
+            }
         }
     }
+    let globalProduct = 1;
+    let isGlobalChanged = false;
+    // Loop through subNums
+        // for each subarr in subNums run below
+    for (let j = 0; j < subNums.length; j++) {
+        let currentSubNums = subNums[j];
+        console.log('[-2] or [-1]', currentSubNums);
+        // get arr of negative number indexes and if a zero is present
+        let largestProduct = 1;
+        let negIndexes = [];
+        for (let i = 0; i < currentSubNums.length; i++) {
+            if (currentSubNums[i] < 0) {
+                negIndexes.push(i);
+            }
+        }
 
-    // neg nums are present
-    if (lenOfNegs % 2 === 0) {
-        for (let j = 0; j < lenOfNegs; j++) {
-            largestProduct *= nums[j];
+        let lenOfNegs = negIndexes.length;
+        console.log('negIndexex', negIndexes);
+        // IF only one negative value
+            // set largestProduct to currentSubNums[0]
+        // otherwise, everything below
+        if (lenOfNegs === 1) {
+            largestProduct = currentSubNums[0];
+        } else {
+            // all positive currentSubNums:
+            if (lenOfNegs === 0) {
+                for (let i = 0; i < currentSubNums.length; i++) {
+                    // console.log(currentSubNums[i]);
+                    if (currentSubNums[i] > 0) {
+                        largestProduct *= currentSubNums[i];
+                    }
+                }
+            }
+
+            // neg currentSubNums are present
+            if (lenOfNegs % 2 === 0) {
+                for (let j = 0; j < lenOfNegs; j++) {
+                    largestProduct *= currentSubNums[j];
+                }
+            }
+            // [1, 2, 3, -1, 2, 1, -1, 3, -1, 6] = 32
+            // get product of (0, first neg i)
+            // (first neg i+1, end)
+            for (let curIndex in negIndexes) {
+                console.log('hit', negIndexes)
+                let left = currentSubNums.slice(0, negIndexes[curIndex]);
+                let right = currentSubNums.slice(negIndexes[curIndex+1], lenOfNegs - 1);
+                let leftProduct = 1;
+                let rightProduct = 1;
+                // console.log(subNums, left, right, curIndex);
+                for (let l = 0; l < left.length; l++) {
+                    leftProduct *= left[l];
+                }
+                for (let r = 0; r < right.length; r++) {
+                    rightProduct *= right[r];
+                }
+                if (largestProduct < leftProduct) {
+                    largestProduct = leftProduct;
+                }
+                if (largestProduct < rightProduct) {
+                    largestProduct = rightProduct;
+                }
+                console.log(curIndex, largestProduct)
+            }
+        }
+        console.log('global', globalProduct);
+        console.log('larget', largestProduct);
+        if (largestProduct > globalProduct) {
+
+            globalProduct = largestProduct;
         }
     }
-    // [1, 2, 3, -1, 2, 1, -1, 3, -1, 6] = 32
-    // get product of (0, first neg i)
-    // (first neg i+1, end)
-    for (let curIndex in negIndexes) {
-        let left = nums.slice(0, negIndexes[curIndex]);
-        let right = nums.slice(negIndexes[curIndex+1], lenOfNegs - 1);
-        let leftProduct = 1;
-        let rightProduct = 1;
-        console.log(nums, left, right, curIndex);
-        for (let l = 0; l < left.length; l++) {
-            leftProduct *= left[l];
-        }
-        for (let r = 0; r < right.length; r++) {
-            rightProduct *= right[r];
-        }
-        if (largestProduct < leftProduct) {
-            largestProduct = leftProduct;
-        }
-        if (largestProduct < rightProduct) {
-            largestProduct = rightProduct;
-        }
-        console.log(curIndex, largestProduct)
+    if (zeroFound && globalProduct < 0) {
+        return 0;
     }
+    return globalProduct;
 
-    return largestProduct;
 };
 
 // console.log(maxProduct([1, 2, 3, -1, 2, 1, -1, 3, -1, 6]), 36);
 // [3,5,8]
 // console.log(maxProduct([2,3]), 6); // 44/190
-console.log(maxProduct([0,2]), 0); // 48/190
+// console.log(maxProduct([0,2]), 2); // 48/190
+console.log(maxProduct([-2,0,-1]), 0); // 2/190
+// I'm not sure how to get around the using 1 for the global, in test 2. 1 is larger than every IP
+// I can't think of a way to distinguish between the 1 that initializes the var and if a 1
+// appears as an input
+
+// Based on all the flags and IF's that I have there has to be a better solution
