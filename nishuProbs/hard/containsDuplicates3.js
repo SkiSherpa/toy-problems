@@ -51,17 +51,51 @@ Return true if such pair exists or false otherwise.
     // IF a pair of values satisfies valueDiff
         // return true
 // retrurn false
+
 var containsNearbyAlmostDuplicate = function(nums, indexDiff, valueDiff) {
     let i = 0;
     let j = 0;
     let len = nums.length;
     while (i <= len ) {
         j = i+1;
-        while (j <= i + indexDiff) {
-            console.log('Math.abs(nums[i] - nums[j])', Math.abs(nums[i] - nums[j]), 'valueDiff', valueDiff);
-            console.log(i, j, '|i-j|', Math.abs(i-j), '<= indexDiff: ', indexDiff);
-            if (Math.abs(nums[i] - nums[j]) <= valueDiff && Math.abs(i - j) <= indexDiff) {
+        while (Math.abs(i - j) <= indexDiff) {
+            if (Math.abs(nums[i] - nums[j]) <= valueDiff) {
                 return true;
+            }
+            j++;
+        }
+        i++;
+
+    }
+    return false;
+
+};
+// gpt helping with making a cache... still times out on the big test
+var _containsNearbyAlmostDuplicate = function(nums, indexDiff, valueDiff) {
+    let i = 0;
+    let j = 0;
+    let len = nums.length;
+    let cache = new Map();
+    while (i <= len ) {
+        j = i+1;
+        while (Math.abs(i - j) < indexDiff) {
+            // console.log('Math.abs(nums[i] - nums[j])', Math.abs(nums[i] - nums[j]), 'valueDiff', valueDiff);
+            // console.log(i, j, '|i-j|', Math.abs(i-j), '<= indexDiff: ', indexDiff);
+            if (Math.abs(nums[i] - nums[j]) <= valueDiff) {
+                const key = `${i},${j}`;
+                if (cache.has(key)) {
+                    if (cache.get(diffKey) <= valueDiff) {
+                        return true;
+                    }
+                } else {
+                    const diff = Math.abs(nums[i] - nums[j]);
+                    if (diff <= valueDiff) {
+                        cache.set(key, diff);
+                        return truel
+                    } else {
+                        cache.set(key, diff);
+                    }
+                }
             }
             j++;
         }
