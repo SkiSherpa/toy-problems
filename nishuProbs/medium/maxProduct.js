@@ -65,7 +65,7 @@ create largest product var = 1
         You do this ^^ for each neg index, except the middle one
     Otherwise you can use middle index to take away
 */
-var maxProduct = function(nums) {
+var _maxProduct = function(nums) {
     // console.log('hi')
     if (nums.length === 1) {
         return nums[0];
@@ -177,9 +177,38 @@ var maxProduct = function(nums) {
 // [3,5,8]
 // console.log(maxProduct([2,3]), 6); // 44/190
 // console.log(maxProduct([0,2]), 2); // 48/190
-console.log(maxProduct([-2,0,-1]), 0); // 2/190
+// console.log(maxProduct([-2,0,-1]), 0); // 2/190
 // I'm not sure how to get around the using 1 for the global, in test 2. 1 is larger than every IP
 // I can't think of a way to distinguish between the 1 that initializes the var and if a 1
 // appears as an input
 
 // Based on all the flags and IF's that I have there has to be a better solution
+var maxProduct = function(nums) {
+    let prevMax = nums[0];
+    let prevMin = nums[0];
+    let result = nums[0];
+    for (let i=1;i<nums.length;i++) {
+        // given the new number, the new maximun can have 3 conditions
+        // 1. number(+) * prevMax(+) is the largest
+        // 2. number(+) it self is the largest
+        // 3. number(-) * prevMin(-) is the largest
+        console.log(i, nums[i] * prevMax, nums[i], nums[i] * prevMin);
+        curMax = Math.max(nums[i] * prevMax, nums[i], nums[i] * prevMin);
+
+        curMin = Math.min(nums[i] * prevMin, nums[i], nums[i] * prevMax);
+
+		// updating the prevMax & prevMin, these two may swap locations
+        prevMax = curMax //
+        prevMin = curMin
+        console.log(prevMax, prevMin);
+        console.log('----')
+        result = Math.max(curMax, result);
+    }
+    return result;
+}
+
+console.log(maxProduct([1, 2, 3, -1, 2, 1, -1, 3, -1, 6]), 36);
+// [3,5,8]
+// console.log(maxProduct([2,3]), 6); // 44/190
+// console.log(maxProduct([0,2]), 2); // 48/190
+// console.log(maxProduct([-2,0,-1]), 0); // 2/190
