@@ -37,6 +37,7 @@
 //     that hits exactly the first k+1 letters of <word>
 // }
 
+
 // progress[i][j][0]  = [[0,0,0,0],
 //                       [1,0,0,1],
 //                       [0,0,0,0]]
@@ -52,7 +53,16 @@
 //                     else 1
 // add a cache for visited cells for ^^, v
 // progress[i][j][k][v]
+// [i,j] - are the indicies of current letter
+// [k] - index of target letter in target word
+// [v] - set of visited letter at their i,j indecies.
 
+// progress is a helper function to find next adjacent letter in target word - iterative fn
+// looping through the board
+    // finding first letter in word
+        // start progress function
+
+//
 
 
 const wordSearch = function (board, word) {
@@ -61,8 +71,8 @@ const wordSearch = function (board, word) {
 
 let  board1 = [
     ["A","B","C","E"],
-    ["S","F","C","E"],[
-    "A","D","E","E"]];
+    ["S","F","C","E"],
+    ["A","D","E","E"]];
 let word1 = "ABCCED"
 // Output: true
 
