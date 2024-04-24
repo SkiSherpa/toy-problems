@@ -29,7 +29,7 @@ function wordSearch(board, word) {
                     ];
                     // console.log('prevProgress', prevProgress);
                     for (let d = 0; d < directions.length; d++) {
-                        const [prevI, prevJ] = directions[d];
+                        const [prevI, prevJ] = directions[d]; // deconstruct and set prevI & prevJ
                         // IF prev cell is IN of bounds?
                         if (prevI >= 0 && prevI < numRows && prevJ >=
 0 && prevJ < numCols) {
@@ -38,6 +38,8 @@ function wordSearch(board, word) {
                             console.log('paths', paths);
                             // paths is a set of coor
                             for (let path of paths) {
+                                // IF the path does NOT have the current cell
+                                    // add the current cell to the prev cell that had a correct letter
                                 if (!path.includes(`(${i}, ${j})`)) {
                                     const newPath = path + `(${i}, ${j})`;
                                     progress[k][i][j].add(newPath);
@@ -51,11 +53,15 @@ function wordSearch(board, word) {
     }
     console.log(progress);
     // Collect all valid paths from the last character's progress
-    const finalProgressGrid = progress[word.length - 1];
+    const finalProgressGrid = progress[word.length - 1]; // find set with length of target word
     const allValidPaths = [];
+    // loop over all cells in the array of with a key that is length of target word
     for (let i = 0; i < numRows; i++) {
         for (let j = 0; j < numCols; j++) {
+            // an if with out an if, if a the set of coor exist in a cell
+                // add it the allValidPaths
             for (let path of finalProgressGrid[i][j]) {
+                console.log("!!~!PATH", path);
                 allValidPaths.push(path);
             }
         }
