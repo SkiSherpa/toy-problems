@@ -30,11 +30,13 @@ function wordSearch(board, word) {
                     // console.log('prevProgress', prevProgress);
                     for (let d = 0; d < directions.length; d++) {
                         const [prevI, prevJ] = directions[d];
-                        // IF current cell is out of bounds
+                        // IF prev cell is IN of bounds?
                         if (prevI >= 0 && prevI < numRows && prevJ >=
 0 && prevJ < numCols) {
+                            console.log('prevI', prevI, 'prevJ', prevJ);
                             const paths = prevProgress[prevI][prevJ];
                             console.log('paths', paths);
+                            // paths is a set of coor
                             for (let path of paths) {
                                 if (!path.includes(`(${i}, ${j})`)) {
                                     const newPath = path + `(${i}, ${j})`;
