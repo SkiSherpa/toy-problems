@@ -36,7 +36,7 @@ The number of nodes in the list is in the range [0, 100].
 
 // loop through the list counting by 2
     // switch the current and the next node
-var swapPairs = function(head) {
+var _swapPairs = function(head) {
     if (!head || !head.next) {
         return head;
     }
@@ -82,6 +82,42 @@ var swapPairs = function(head) {
     return addNextTwo(dummyHead, curHead, nextNodeHead);
 };
 
+// going to try and solve with out the constraint of solving in place
+// create a dummyHead
+// loop through head
+    // save current and next node
+    // IF next node is not null & curNode === head - for initial case
+        // add next node to dummy head
+    // IF next node is not null & curNode !== head - for not inital case
+        // add next node to curNode
+    // add current node
+
+    // set current to the next, next node
+// return next of dummy head
+var swapPairs = function(head) {
+    console.log("------")
+    const dummyHead = new ListNode(-10);
+    if (!head || !head.next) {
+        return head;
+    }
+    dummyHead.next = head;
+    let prev = dummyHead;
+
+    while (prev.next && prev.next.next) {
+        let first = prev.next;
+        let second = first.next;
+        console.log('!!!', first, second);
+        // swap
+        first.next = second.next;
+        second.next = first
+
+        // move to next pair
+        prev = first
+        console.log("prev", prev);
+    }
+    return dummyHead.next;
+}
+
 
     class ListNode {
         constructor(val) {
@@ -98,5 +134,13 @@ var swapPairs = function(head) {
     head1.next = node12;
     node12.next = node13;
     node13.next = node14;
-
+    // ex1:
     console.log(swapPairs(head1), [2,1,4,3]);
+
+    // // ex2:
+    // const head2 = new ListNode(null);
+    // console.log(swapPairs(head2), []);
+
+    // // ex3:
+    // const head3 = new ListNode(1);
+    // console.log(swapPairs(head3), [1]);
