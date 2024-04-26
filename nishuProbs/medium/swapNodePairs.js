@@ -94,7 +94,7 @@ var _swapPairs = function(head) {
 
     // set current to the next, next node
 // return next of dummy head
-var swapPairs = function(head) {
+var _swapPairs = function(head) {
     console.log("------")
     const dummyHead = new ListNode(-10);
     if (!head || !head.next) {
@@ -103,22 +103,56 @@ var swapPairs = function(head) {
     dummyHead.next = head;
     let prev = dummyHead;
 
-    while (prev.next && prev.next.next) {
-        let first = prev.next;
-        let second = first.next;
-        console.log('!!!', first, second);
-        // swap
-        first.next = second.next;
-        second.next = first
+    while (prev.next != null && prev.next.next != null) {
+        let first = prev.next; // 3
+        let second = first.next; // 4
+        let third = second.next
+        // console.log('!!!', first, second);
+        // first pass
+        if (prev === dummyHead) {
+            dummyHead.next = second;
+            second.next = first;
+        } else {
+            // swap
+            prev.next = second.next;
+            second.next = first;
+            first.next = null;
+        }
 
+
+        // console.log('dummy', dummyHead.next);
         // move to next pair
-        prev = first
-        console.log("prev", prev);
+        prev = third;
+        // console.log("prev", prev);
     }
     return dummyHead.next;
 }
 
+var swapPairs = function (head) {
+    if (!head || !head.next) {
+        return head;
+    }
+    let newHead=head.next // 2
+    let curr=head // 1
+    let prev=null
+    while (curr != null && curr.next != null) {
+        console.log('t', curr);
+        let temp = curr.next.next // 3
+        curr.next.next = curr // 1.n.n = iteself
+        if (prev==null) {
+            prev=curr // 1
+        } else {
+            prev.next=curr.next
+            console.log('1', prev);
+            prev=curr
+            console.log('2', prev);
+        }
+        curr.next=temp // 1 > 3
+        curr=curr.next // 2 in 1 position
+    }
 
+    return newHead
+}
     class ListNode {
         constructor(val) {
             this.val = val;
