@@ -1,4 +1,5 @@
 // JS does not have a native stack data structure. An arr is what seems to be commonly used
+// https://leetcode.com/problems/implement-queue-using-stacks/
 var MyQueue = function() {
     this.stack = [];
 };
