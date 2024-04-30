@@ -42,9 +42,57 @@ Follow up: If you have figured out the O(n) solution, try coding another solutio
             // set largerSum to curSum
     // j++
 
-var maxSubArray = function(nums) {
+var _maxSubArray = function(nums) {
     if (nums.length === 1) {
         return nums[0];
     }
 
 };
+// prefix = nums[0]
+// largestSum = 0
+// two pointers, i = 0, j = 1
+// loop through nums
+    // prefix = current j + prefix
+    // IF prefix is negative
+        // move left pointer to right pointer
+        // set prefix to num at i
+    // IF largestSum is less than prefix
+        // set largest to prefix
+
+let __maxSubArray = (nums) => {
+    let prefix = nums[0];
+    let largest = 0;
+    let i = 0;
+    let j = 1;
+    while (j < nums.length) {
+        prefix = nums[j] + prefix
+        console.log(i, j);
+        console.log(nums[i], nums[j], prefix);
+        if (prefix < 0) {
+            prefix = nums[i];
+            i = j;
+        }
+        if (prefix > largest) {
+            largest = prefix;
+        }
+        j++;
+    }
+    return largest;
+}
+
+let maxSubArray = (nums) => {
+    let max = nums[0];
+    let curSum = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+        if (curSum < 0) {
+            curSum = 0;
+        }
+        curSum += nums[i];
+        max = Math.max(max, curSum);
+    }
+    return max;
+}
+console.log(maxSubArray([-2,1,-3,4,-1,2,1,-5,4]), 6);
+// t = O(n), where n is the length of nums
+// m = O(1)
