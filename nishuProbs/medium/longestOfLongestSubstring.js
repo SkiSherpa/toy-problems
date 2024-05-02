@@ -47,7 +47,7 @@ s consists of English letters, digits, symbols and spaces.
     // IF totLongest < curLongest
         // totLongest = curLongest
 // return curLongest
-var lengthOfLongestSubstring = function(s) {
+var _lengthOfLongestSubstring = function(s) {
     if (s.length === 0) {
         return 0;
     }
@@ -82,6 +82,55 @@ var lengthOfLongestSubstring = function(s) {
     }
     return totLongest;
 };
+
+// two pointer i and j
+// create totLongest
+// create obj(set) to hold indexs: (set)longest s with out repeating letters
+// loop through s
+    // IF obj set has current i
+        // IF current i set has current letter - case for reset/new set
+            // move i up by one
+            // j = i
+            // add new i to objset, with a new set as value
+        // otherwise, add current letter to value set
+    // otherwise, add current i to obj set, with current letter
+    // j++
+// loop through obj set
+    // IF i exists as a key in objset
+        // IF totLongest < value length
+            // set totLongest to value length
+// return totLongest
+let lengthOfLongestSubstring = function(s) {
+    let i = 0;
+    let j = 0;
+    let longest = 0;
+    let obj = {};
+    while (j < s.length) {
+        if (obj[i]) {
+            if (obj[i].has(s[j])) {
+                i++;
+                j = i;
+                obj[i] = new Set(s[i]);
+            } else {
+                obj[i].add(s[j]);
+            }
+        } else {
+            obj[i] = new Set(s[i]);
+        }
+        j++
+    }
+    for (let i = 0; i < s.length; i++) {
+        if (obj[i] && obj[i].size > longest) {
+            longest = obj[i].size;
+        }
+    }
+    return longest;
+}
+// t = O(n^2), tech not a nested for loop, but act a lot like one
+// m = O(n), I create a whole new obj with length of s as all items in it
+// t = 320ms 7.48% | m = 136.90 MB 5.03%
+// but I got to a sol in 30 mins, and it actually worked. So I think that's a win
+
 // I've gone backwards
 console.log('3', lengthOfLongestSubstring('abcabcbb')) // 1/987
 // console.log('3', lengthOfLongestSubstring('dvdf')) // 407/987
@@ -89,3 +138,11 @@ console.log('3', lengthOfLongestSubstring('abcabcbb')) // 1/987
 // might have to run throung it again,
     // but slice off the first letter once done
 // console.log('5', lengthOfLongestSubstring("anviaj")) // 477/987
+/*
+{
+    1: abc
+    2: bca
+    3: cab
+    4:
+}
+*/
