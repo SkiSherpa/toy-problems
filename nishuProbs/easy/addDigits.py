@@ -45,3 +45,13 @@ class Solution:
 test1 = Solution()
 print(test1.addDigits(38), 2)
 # 3 + 8 = 11 -> 1 + 1 = 2
+# t = O(n), where n is the number of digits in num. convert to string and then looping over string would be how many digits there are in num
+# m = O(n), where n is the number of digits in num
+# in general this was slow
+# t = 43 ms, 13.64% | m = 16.56MB 53.08%
+
+
+# how to do it in one line
+class Solution:
+    def addDigits(self, num: int) -> int:
+        return num if num < 10 else self.addDigits(sum(int(digit) for digit in str(num)))
