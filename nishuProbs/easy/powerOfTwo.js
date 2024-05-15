@@ -25,6 +25,7 @@ let isPowerOfTwo = function(n) {
 // This is clearly the way to go
 // t = O(n^x), where 0 < x < 1
 // m = O()
+// gpt says that t = O(log(n)) exactly
 
 // this mathy way doesn't seem to work. It has some rounding error.
 // I bet it would work in python.
