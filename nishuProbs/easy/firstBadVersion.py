@@ -49,3 +49,4 @@ class Solution:
             else:
                 left = mid + 1
         return left
+# this is still pretty slow, only t = 12%, mem = 63%
