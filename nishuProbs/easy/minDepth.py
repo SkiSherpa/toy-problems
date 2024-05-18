@@ -40,7 +40,7 @@
 # call helper with (root, 1)
 # return the count
 class Solution:
-    def minDepth(self, root: Optional[TreeNode]) -> int:
+    def minDepth(self, root: ptional[TreeNode]) -> int:
         if root is None:
             return 0
 
