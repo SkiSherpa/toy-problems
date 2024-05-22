@@ -38,16 +38,31 @@
 class Solution:
     def intersect(self, nums1: list[int], nums2: list[int]) -> list[int]:
         same = []
-        for i in range(0, len(nums1) - 1):
+        i = 0
+        while i < len(nums1):
             cur_num = nums1[i]
             if cur_num in nums2:
                 same.append(cur_num)
                 # slice nums1
                 nums1 = nums1[:i] + nums1[i+1:]
-                print(nums1)
+                # slice nums2
+                target_index = nums2.index(cur_num)
+                nums2 = nums2[:target_index] + nums2[target_index + 1:]
+                i -= 1
+            i += 1
+        return same
 
 t = Solution()
-t.intersect([1,2,2,1], [2,2])
+print('ans', t.intersect([1,2,2,1], [2,2]))
 # Example 1:
 # Input: nums1 = [1,2,2,1], nums2 = [2,2]
 # Output: [2,2]
+
+# t = O(n), where n is the length of nums1
+# m = O(n), at worst case all the nums in nums1 intersect with nums2
+# t = 64ms 9.04% | 16.82Mb 15.32%
+
+# 1. What if the given array is already sorted? How would you optimize your algorithm?
+
+# 2. What if nums1's size is small compared to nums2's size? Which algorithm is better?
+# 3. What if elements of nums2 are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?
