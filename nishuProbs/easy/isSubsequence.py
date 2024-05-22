@@ -18,7 +18,8 @@
 # s and t consist only of lowercase English letters.
 
 
-# Follow up: Suppose there are lots of incoming s, say s1, s2, ..., sk where k >= 109, and you want to check one by one to see if t has its subsequence. In this scenario, how would you change your code?
+# Follow up: Suppose there are lots of incoming s, say s1, s2, ..., sk where k >= 10^9, and you want to check one by one to see if t has its subsequence. In this scenario, how would you change your code?
+
 # IP: two strings - s and t
 # OP: boolean - true if t has the same sequence of chars as s
 # C: other chars can be inbetween letters and still be true
@@ -54,3 +55,27 @@ print(e.isSubsequence(s, t))
 # t = O(n), where n is the length of t
 # m = O(1)
 # t = 35ms 61.95% | m = 16.56Mb 88.85%
+
+# Follow up: Suppose there are lots of incoming s, say s1, s2, ..., sk where k >= 10^9, and you want to check one by one to see if t has its subsequence. In this scenario, how would you change your code?
+# GPT says that mine might be too slow and suggests this:
+class Sol:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        # Build index for characters in t
+        index = {}
+        for i, char in enumerate(t):
+            if char not in index:
+                index[char] = []
+            index[char].append(i)
+
+        # Check if s is a subsequence of t
+        i = 0  # Pointer for s
+        for char in s:
+            if char not in index or not index[char]:  # If char not in t or no more occurrences left
+                return False
+            # Find the smallest index greater than or equal to i
+            j = bisect.bisect_left(index[char], i)
+            if j == len(index[char]):
+                return False
+            i = index[char][j] + 1  # Move pointer i to the next position
+
+        return True
