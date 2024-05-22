@@ -32,5 +32,31 @@
 
 
 # Follow up: Can you find an O(n) solution?
+# IP: a list of nums
+# OP: a int - the third largest number
+# create a dict to hold all uniq numbers
+# looop through the list
+    # IF the current number in not in the dict
+        # add it as 'num': num
+# create a new sorted list of the distinct numbers in descending order
+# return the third item
 class Solution:
     def thirdMax(self, nums: list[int]) -> int:
+        uniq_nums = {}
+        for num in nums:
+            if num not in uniq_nums:
+                uniq_nums[num] = num
+
+        sorted_nums = sorted(uniq_nums.values(), reverse=True)
+        length = len(sorted_nums)
+        if length < 3:
+            return sorted_nums[0]
+
+        return sorted_nums[2]
+
+t = Solution()
+print(t.thirdMax([1]), 1)
+
+# t = O(nlog(n)), where n the number of ints in nums - due to the sort
+# m = O(2n) ~ O(n), create the dict and then the sorted_nums list
+# t = 47ms 82.01% | m = 17.81 Mb
