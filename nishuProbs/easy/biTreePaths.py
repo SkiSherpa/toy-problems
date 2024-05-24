@@ -32,7 +32,7 @@
     # create a tempPath is root to start
     # add
 class Solution:
-    def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
+    def binaryTreePaths(self, root: optional[treeNode]) -> list[str]:
         paths = []
         def dfs(node, path):
             if not node:
