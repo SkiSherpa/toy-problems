@@ -51,6 +51,7 @@ class Game:
 
             # check for winner
             self.is_win()
+
             if self.winner == 'X':
                 print("X has won")
                 return
@@ -83,6 +84,7 @@ class Game:
             # IF cur Pos is not an empty str
                 # print 'that spot is chosen'
         # return state of the board/winner
+        print(i,j, player, 'board', self.board)
         if self.board[i][j] == '-':
             self.board[i][j] = player
         else:
@@ -98,14 +100,13 @@ class Game:
                 # change state to winner for cur_player
     def is_win(self):
         # col
-        for i in range(0,2):
-            cur_row = self.board[i]
-            if cur_row[0] == cur_row[1] == cur_row[2]:
-                winning_player = cur_row[0]
+        for j in range(0,3):
+            if self.board[0][j] == self.board[1][j] == self.board[2][j]:
+                winning_player = self.board[0][j]
                 self.winner = winning_player
                 return {'board': self.board, 'winner': self.winner}
         # row
-        for i in range(0,2):
+        for i in range(0,3):
             if self.board[i][0] == self.board[i][1] == self.board[i][2]:
                 winning_player = self.board[i][0]
                 self.winner = winning_player
@@ -120,9 +121,9 @@ class Game:
             self.winner = winning_player
             return {'board': self.board, 'winner': self.winner}
         # tie
-        for i in range(0,2):
+        for i in range(0,3):
             cur_row = self.board[i]
-            for j in range(0,2):
+            for j in range(0,3):
                 cur_cell = cur_row[j]
                 # IF space found return state of board - game should continur
                 if cur_cell == '-':
