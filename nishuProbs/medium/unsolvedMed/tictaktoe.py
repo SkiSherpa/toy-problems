@@ -32,7 +32,7 @@ class Game:
 
     def play_game(self):
         game = self.start_new_game()
-        self.board = [['X','-','-'],['X','-','-'],['-','-','-']]
+        self.board = [['X','-','X'],['-','X','-'],['-','-','-']]
         count = 0
         while count < 10:
             # keep track of player's turn
