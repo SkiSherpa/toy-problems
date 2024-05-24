@@ -27,7 +27,7 @@
     # make a count - if odd its X's turn
 class Game:
     def __init__(self):
-        self.board = [['','',''],['','',''],['','','']]
+        self.board = [['-','-','-'],['-','-','-'],['-','-','-']]
         self.winner = None
 
     def play_game(self):
@@ -47,7 +47,7 @@ class Game:
                 count += 1
 
             # check for winner
-            game = self.is_win(game)
+            game = self.is_win()
             if game.winner == 'X':
                 print("X has won")
                 return
@@ -66,13 +66,13 @@ class Game:
         cell_count = 0
         for row in self.board:
             for cell in row:
-                if cell == ' ':
+                if cell != '-':
                     cell_count += 1
+
         if cell_count == 9:
             # check win state
             print('game is over, cannot make a move')
 
-        # pull out i and j position from pos
         i,j = pos
         # IF current position is an empty str
             # add player to current position
@@ -80,7 +80,7 @@ class Game:
             # IF cur Pos is not an empty str
                 # print 'that spot is chosen'
         # return state of the board/winner
-        if self.board[i][j] == ' ':
+        if self.board[i][j] == '-':
             self.board[i][j] == player
         else:
             print('that spot is chosen')
@@ -123,10 +123,13 @@ class Game:
             for j in range(0,2):
                 cur_cell = cur_row[j]
                 # IF space found return state of board - game should continur
-                if cur_cell == ' ':
+                if cur_cell == '-':
                     return {self.board, self.winner}
         return 'Tie'
 
     def start_new_game(self):
-        self.board = [['','',''],['','',''],['','','']]
+        self.board = [['-','-','-'],['-','-','-'],['-','-','-']]
         self.winner = None
+
+t = Game()
+t.play_game()
