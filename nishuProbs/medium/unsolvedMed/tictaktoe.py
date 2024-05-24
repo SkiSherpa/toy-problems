@@ -32,6 +32,7 @@ class Game:
 
     def play_game(self):
         game = self.start_new_game()
+        self.board = [['X','-','-'],['X','-','-'],['-','-','-']]
         count = 0
         while count < 10:
             # keep track of player's turn
@@ -40,21 +41,23 @@ class Game:
             else:
                 player = 'O'
 
-            pos = (0,0) # normally input from the front
+            pos = (2, 0) # normally input from the front
             print("It's player " + player + "'s turn")
             game = self.make_move(player, pos)
+            print('board', self.board)
             if game != None:
+                print('!!! !!! not none')
                 count += 1
 
             # check for winner
-            game = self.is_win()
-            if game.winner == 'X':
+            self.is_win()
+            if self.winner == 'X':
                 print("X has won")
                 return
-            elif game.winner == 'O':
+            elif self.winner == 'O':
                 print("O has won")
                 return
-            elif game.winner == 'Tie':
+            elif self.winner == 'Tie':
                 print("Cats Game, it's a Tie")
                 return
 
@@ -81,12 +84,11 @@ class Game:
                 # print 'that spot is chosen'
         # return state of the board/winner
         if self.board[i][j] == '-':
-            self.board[i][j] == player
+            self.board[i][j] = player
         else:
             print('that spot is chosen')
             return None
-        return {self.board, self.winner}
-
+        return {'board': self.board, 'winner': self.winner}
     # col
         # j is fixed at 0, 1, 2
         # loop through board
@@ -101,22 +103,22 @@ class Game:
             if cur_row[0] == cur_row[1] == cur_row[2]:
                 winning_player = cur_row[0]
                 self.winner = winning_player
-                return {self.board, self.winner}
+                return {'board': self.board, 'winner': self.winner}
         # row
         for i in range(0,2):
             if self.board[i][0] == self.board[i][1] == self.board[i][2]:
                 winning_player = self.board[i][0]
                 self.winner = winning_player
-                return {self.board, self.winner}
+                return {'board': self.board, 'winner': self.winner}
         # diag
         if self.board[0][0] == self.board[1][1] == self.board[2][2]:
             winning_player = self.board[0][0]
             self.winner = winning_player
-            return {self.board, self.winner}
+            return {'board': self.board, 'winner': self.winner}
         if self.board[2][0] == self.board[1][1] == self.board[0][2]:
             winning_player = self.board[2][0]
             self.winner = winning_player
-            return {self.board, self.winner}
+            return {'board': self.board, 'winner': self.winner}
         # tie
         for i in range(0,2):
             cur_row = self.board[i]
@@ -124,7 +126,7 @@ class Game:
                 cur_cell = cur_row[j]
                 # IF space found return state of board - game should continur
                 if cur_cell == '-':
-                    return {self.board, self.winner}
+                    return {'board': self.board, 'winner': self.winner}
         return 'Tie'
 
     def start_new_game(self):
