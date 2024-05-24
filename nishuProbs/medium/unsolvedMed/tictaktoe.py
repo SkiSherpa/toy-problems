@@ -45,6 +45,7 @@ class Game:
             game = self.make_move(player, pos)
             if game != None:
                 count += 1
+
             # check for winner
             game = self.is_win(game)
             if game.winner == 'X':
@@ -86,9 +87,45 @@ class Game:
             return None
         return {self.board, self.winner}
 
-
+    # col
+        # j is fixed at 0, 1, 2
+        # loop through board
+            # row[i]
+            # IF each row at 0,1,2 are all equal
+                # cur_player = cur_row[j]
+                # change state to winner for cur_player
     def is_win(self):
-        pass
+        # col
+        for i in range(0,2):
+            cur_row = self.board[i]
+            if cur_row[0] == cur_row[1] == cur_row[2]:
+                winning_player = cur_row[0]
+                self.winner = winning_player
+                return {self.board, self.winner}
+        # row
+        for i in range(0,2):
+            if self.board[i][0] == self.board[i][1] == self.board[i][2]:
+                winning_player = self.board[i][0]
+                self.winner = winning_player
+                return {self.board, self.winner}
+        # diag
+        if self.board[0][0] == self.board[1][1] == self.board[2][2]:
+            winning_player = self.board[0][0]
+            self.winner = winning_player
+            return {self.board, self.winner}
+        if self.board[2][0] == self.board[1][1] == self.board[0][2]:
+            winning_player = self.board[2][0]
+            self.winner = winning_player
+            return {self.board, self.winner}
+        # tie
+        for i in range(0,2):
+            cur_row = self.board[i]
+            for j in range(0,2):
+                cur_cell = cur_row[j]
+                # IF space found return state of board - game should continur
+                if cur_cell == ' ':
+                    return {self.board, self.winner}
+        return 'Tie'
 
     def start_new_game(self):
         self.board = [['','',''],['','',''],['','','']]
