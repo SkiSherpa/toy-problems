@@ -32,7 +32,9 @@ class Game:
 
     def play_game(self):
         game = self.start_new_game()
-        self.board = [['X','-','X'],['-','X','-'],['-','-','-']]
+        # self.board = [['X','O','X']
+        #               ,['O','X','X']
+        #               ,['O','X','O']]
         count = 0
         while count < 10:
             # keep track of player's turn
@@ -48,7 +50,10 @@ class Game:
             if game != None:
                 print('!!! !!! not none')
                 count += 1
-
+# Am on checking TIE condition
+            self.board = [['X','O','X']
+                      ,['O','X','X']
+                      ,['O','X','O']]
             # check for winner
             self.is_win()
 
