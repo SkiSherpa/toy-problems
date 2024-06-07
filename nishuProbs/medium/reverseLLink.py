@@ -69,3 +69,7 @@ node4.next = node5
 t = Solution()
 rev = t.reverseList(node1)
 print("ans", rev)
+
+# t = O(n), where n is the length of the linkedlist
+# m = O(1)
+# t = 36ms 65.80% | m = 17.75 Mb 29.76%
