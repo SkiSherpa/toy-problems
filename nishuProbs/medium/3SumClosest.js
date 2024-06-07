@@ -67,3 +67,6 @@ let ip96 = [13,252,-87,-431,-148,387,-290,572,-311,-721,222,673,538,919,483,-128
 console.log(threeSumClosest(ip96, -2805), -2805) // 96/102
 // console.log(threeSumClosest([-1, -2, -3, -4, -5 ], -10), -10)
 // got a bit stuck on the ip96, due to not handling the sort
+// t = O(n^2), where n is the length of nums
+    // due to nest loops
+// m = O(1)
