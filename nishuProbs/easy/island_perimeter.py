@@ -29,6 +29,11 @@ from typing import List
 # 3 sq = 3+3+2 = 8 || 3+2+3
 # 4 sq = 3+3+2+2 = 10 || 2+2+2+2= 8
 
+# IF a single list
+# IF one island = 4
+# IF two = 6
+# IF more than 2 = 6 + 2n
+
 # loop through the list
 # count side of each one found
 # keep adding to the count
@@ -37,50 +42,95 @@ from typing import List
 # IF you have a zero above, right, bottom, left, each is 1 side
 # IF surrounded by 1's then 0 sides
 
+
 class Solution:
     def islandPerimeter(self, grid: List[List[int]]) -> int:
         count = 0
-        rowLen = len(grid[0])
         colLen = len(grid)
-        for i in range(rowLen):
-            for j in range(colLen):
-                above = -10
-                right = -10
-                bottom = -10
-                left = -10
-                # above
-                if i - 1 >= 0:
-                    above = grid[i-1][j]
-                else:
-                    above = 0
+        rowLen = len(grid[0]) - 1
+        # single sub list
+        if colLen == 1:
+            num_of_sides = 6
+            for k in range(rowLen):
+                count += grid[0][k]
 
-                # right
-                try:
-                    right = grid[i][j+1]
-                except IndexError:
-                    right = 0
+            if count == 1:
+                return 4
+            if count == 2:
+                return 6
+            count = count - 2
+            num_of_sides += 2*count
+            return num_of_sides
+        # is grid
+        else:
+            for i in range(rowLen):
+                print(grid[i])
+                for j in range(colLen - 1):
+                    print('[j]', grid[j])
+                    above = -10
+                    right = -10
+                    bottom = -10
+                    left = -10
+                    # above
+                    if i - 1 >= 0:
+                        above = grid[i-1][j]
+                    else:
+                        above = 0
 
-                # bottom
-                try:
-                    bottom = grid[i+1][j]
-                except IndexError:
-                    bottom = 0
-                # left
+                    # right
+                    try:
+                        right = grid[i][j+1]
+                    except IndexError:
+                        right = 0
 
-                if j - 1 >= 0:
-                    left = grid[i][j-1]
-                else:
-                    left = 0
+                    # bottom
+                    try:
+                        bottom = grid[i+1][j]
+                    except IndexError:
+                        bottom = 0
+                    # left
 
+                    if j - 1 >= 0:
+                        left = grid[i][j-1]
+                    else:
+                        left = 0
 
-                if grid[i][j] == 1:
-                    count += 4 - above - right - bottom - left
+                    print(i, j, rowLen, colLen, grid[i][j])
+                    if grid[i][j] == 1:
+                        count += 4 - above - right - bottom - left
 
         return count
 
+class Sol:
+    def islandPerimeter(self, grid: List[List[int]]) -> int:
+        def is_water(i: int, j: int) -> bool:
+            return i < 0 or i >= len(grid) or j < 0 or j >= len(grid[0]) or grid[i][j] == 0
 
+        count = 0
+        rowLen = len(grid)
+        colLen = len(grid[0])
+
+        for i in range(rowLen):
+            for j in range(colLen):
+                if grid[i][j] == 1:
+                    # Check all four sides
+                    if is_water(i-1, j):  # above
+                        count += 1
+                    if is_water(i+1, j):  # below
+                        count += 1
+                    if is_water(i, j-1):  # left
+                        count += 1
+                    if is_water(i, j+1):  # right
+                        count += 1
+        return count
 t = Solution()
-print(t.islandPerimeter([[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]), 16)
+# print(t.islandPerimeter([[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]), 16)
+# print(t.islandPerimeter([[1]]), 4)
+# print(t.islandPerimeter([[0,1,1]]), 6)
+# print(t.islandPerimeter([[0,1,1,1,1,0,0]]), 10)
+# print(t.islandPerimeter([[1],[0]]), 4) #21
+print(t.islandPerimeter([[0],[1]]), 4) #25
+# t
 # test = [[1,2,3],[4,5,6]]
 # jest = test[0][3]
 # print(jest) -> index Error
