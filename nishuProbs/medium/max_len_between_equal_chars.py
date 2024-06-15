@@ -98,17 +98,19 @@ class Sol:
                 occur[s[i]] = [i,i]
 
         for indexes in occur:
-            diff = indexes[1] - indexes[0]
+            diff = occur[indexes][1] - occur[indexes][0] - 1
             if diff > longest:
                 longest = diff
 
         return longest
 
+# t = O(n), where n is the length of s
+# m = O(n), where n is the length of s
+# t = 30ms 90.72% | 16.42Mb 74.30%
 
-
-t = Solution()
+t = Sol()
 print(t.maxLengthBetweenEqualCharacters('abedceh'), 2)
-print(t.maxLengthBetweenEqualCharacters('aa'), 0)
-print(t.maxLengthBetweenEqualCharacters('a'), -1)
-print(t.maxLengthBetweenEqualCharacters('cbzxy'), -1)
-print(t.maxLengthBetweenEqualCharacters("abaca"), 3)
+# print(t.maxLengthBetweenEqualCharacters('aa'), 0)
+# print(t.maxLengthBetweenEqualCharacters('a'), -1)
+# print(t.maxLengthBetweenEqualCharacters('cbzxy'), -1)
+# print(t.maxLengthBetweenEqualCharacters("abaca"), 3)
