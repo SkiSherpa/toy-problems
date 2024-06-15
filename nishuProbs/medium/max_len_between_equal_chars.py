@@ -81,6 +81,31 @@ class Solution:
 # m = O(n), where n is the number of char pairs
 # t = 44ms 26.32% | 16.55Mb 31.48%
 
+
+# track the min and max index of each occurance in dict
+# then loop throough occurance and find the difference
+class Sol:
+    def maxLengthBetweenEqualCharacters(self, s: str) -> int:
+        if len(s) == 1:
+            return -1
+        occur = {}
+        longest = -1
+
+        for i in range(len(s)):
+            if s[i] in occur:
+                occur[s[i]][1] = i
+            else:
+                occur[s[i]] = [i,i]
+
+        for indexes in occur:
+            diff = indexes[1] - indexes[0]
+            if diff > longest:
+                longest = diff
+
+        return longest
+
+
+
 t = Solution()
 print(t.maxLengthBetweenEqualCharacters('abedceh'), 2)
 print(t.maxLengthBetweenEqualCharacters('aa'), 0)
