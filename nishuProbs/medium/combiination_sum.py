@@ -55,7 +55,7 @@ class Solution:
             if cur == target:
                 res.append([cur])
                 j -= 1
-            if
+
 
         return res
 
@@ -63,4 +63,41 @@ class Solution:
 # Input: candidates = [2,3,6,7], target = 7
 # Output: [[2,2,3],[7]]
 t = Solution()
-print(t.combinationSum([2,3,6,7], 7), 'ans', [[2,2,3],[7]])
+# print(t.combinationSum([2,3,6,7], 7), 'ans', [[2,2,3],[7]])
+
+class Sol:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        # Sort candidates to efficiently prune branches in backtracking
+        candidates.sort()
+        result = []
+
+        def backtrack(start, current_combination, current_sum):
+            if current_sum == target:
+                result.append(current_combination[:])
+                return
+            if current_sum > target:
+                return
+
+            for i in range(start, len(candidates)):
+                current_combination.append(candidates[i])
+                print(current_combination)
+                backtrack(i, current_combination, current_sum + candidates[i])
+                current_combination.pop()
+                print('been popped', current_combination)
+
+        backtrack(0, [], 0)
+        return result
+
+# Example usage:
+p = Sol()
+candidates1 = [2, 3, 6, 7]
+target1 = 7
+print(p.combinationSum(candidates1, target1))  # Output: [[2, 2, 3], [7]]
+
+# candidates2 = [2, 3, 5]
+# target2 = 8
+# print(p.combinationSum(candidates2, target2))  # Output: [[2, 2, 2, 2], [2, 3, 3], [3, 5]]
+
+# candidates3 = [2]
+# target3 = 1
+# print(p.combinationSum(candidates3, target3))  # Output: []
