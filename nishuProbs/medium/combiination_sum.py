@@ -80,7 +80,9 @@ class Sol:
 
             for i in range(start, len(candidates)):
                 current_combination.append(candidates[i])
-                print(current_combination)
+                print('i:', i, '__cur val:', candidates[i])
+                print(' ')
+                print('__cur combo:', current_combination, '__ cur sum:', current_sum)
                 backtrack(i, current_combination, current_sum + candidates[i])
                 current_combination.pop()
                 print('been popped', current_combination)
