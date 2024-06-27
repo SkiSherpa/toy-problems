@@ -25,7 +25,7 @@
     # keep a count of the current number
     # when number changes add the count to res list
 
-class Sol:
+class Solution:
     def primes(self, nums):
         primes = [2,3,5,7,11,13]
         nums.sort()
@@ -54,11 +54,11 @@ class Sol:
 
 
 
-t = Sol()
+t = Solution()
 # print(t.primes([2,2,2]), [3])
 # print(t.primes([2,5]), [1,0,1])
 # print(t.primes([5,5,5]), [0,0,3])
-print(t.primes([2,3,7,11,11,2]), [2,1,0,1,2])
+# print(t.primes([2,3,7,11,11,2]), [2,1,0,1,2])
 
 # more semantic naming for var used
 # i = nums_index
