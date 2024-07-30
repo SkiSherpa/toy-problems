@@ -48,121 +48,125 @@ Constraints:
 // [-1,0,1,2,-1,-4]
 
 // [-1,0] -> figure out what you need to sum to zero
-    // 0 - [-1 + 0] = 1
-    // loop through the rest of numsCopy till end length, looking for a 1
-    // IF found add to [-1, 0] -> [-1, 0, 1]
-        // push to return array
+// 0 - [-1 + 0] = 1
+// loop through the rest of numsCopy till end length, looking for a 1
+// IF found add to [-1, 0] -> [-1, 0, 1]
+// push to return array
 
 // [-1, 1]
-    // 0 - [-1, + 1] = 0, but no zero after 1, which ii good, shouldn't repeat
-    // go till end length, looking for zero
-    // IF statement shouldn't trigger, no push
+// 0 - [-1, + 1] = 0, but no zero after 1, which ii good, shouldn't repeat
+// go till end length, looking for zero
+// IF statement shouldn't trigger, no push
 // do this until [-1, -1, -4]
 // then move partition up by 1
 // [0,1,2,-1,-4,-1]
 
 // [0, 1]
-    // 0 - [0+1] = -1
-var _threeSum = function(nums) {
-    let triplets = new Map();
-    let copyNums = nums[0];
-    let len = copyNums.length - 1;
+// 0 - [0+1] = -1
+var _threeSum = function (nums) {
+	let triplets = new Map();
+	let copyNums = nums[0];
+	let len = copyNums.length - 1;
 
-    let start = 1;
-    while (start <= len) {
-        // adding the first number, ex -1
-        let curTriple = [copyNums[start - 1]];
-        // inner loop to change the start pointer
-        let i = start;
-        while (i <= len) {
-            let secondNum = copyNums[start];
-            curTriple.push(secondNum);
-            // find number to zum to zero
-            let targetNum = 0 - curTriple[0] + curTriple[1];
-            let j = i + 1;
-            while (j <= len) {
-                let current = copyNums[j];
-                console.log(1 , current);
-                // IF current sums to zero
-                    // sort triplet
-                    // add triplet to map
+	let start = 1;
+	while (start <= len) {
+		// adding the first number, ex -1
+		let curTriple = [copyNums[start - 1]];
+		// inner loop to change the start pointer
+		let i = start;
+		while (i <= len) {
+			let secondNum = copyNums[start];
+			curTriple.push(secondNum);
+			// find number to zum to zero
+			let targetNum = 0 - curTriple[0] + curTriple[1];
+			let j = i + 1;
+			while (j <= len) {
+				let current = copyNums[j];
+				console.log(1, current);
+				// IF current sums to zero
+				// sort triplet
+				// add triplet to map
 
-                j++;
-            }
-            i++;
-        }
-        start++;
-    }
-
-
+				j++;
+			}
+			i++;
+		}
+		start++;
+	}
 };
 
-var threeSum = function(nums) {
-    // Sort the array
-    nums.sort((a, b) => a - b);
+var threeSum = function (nums) {
+	// Sort the array
+	nums.sort((a, b) => a - b);
 
-    const result = [];
-    console.log(nums);
-    // Iterate over the array
-    for (let i = 0; i < nums.length - 2; i++) {
-        console.log('    ');
-        console.log('    ');
-        console.log('---  ---  new for it  ---  ---');
-        // Skip duplicate values for the first element
-        if (i > 0 && nums[i] === nums[i - 1]) {
-            console.log('continue, i', i);
-            continue;
-        }
+	const result = [];
+	console.log(nums);
+	// Iterate over the array
+	for (let i = 0; i < nums.length - 2; i++) {
+		console.log("    ");
+		console.log("    ");
+		console.log("---  ---  new for it  ---  ---");
+		// Skip duplicate values for the first element
+		if (i > 0 && nums[i] === nums[i - 1]) {
+			console.log("continue, i", i);
+			continue;
+		}
 
-        let left = i + 1;
-        let right = nums.length - 1;
+		let left = i + 1;
+		let right = nums.length - 1;
 
-        while (left < right) {
-            console.log('    ');
-            console.log('~~~~~~~    new while it   ~~~~~~~~')
-            console.log('i ------', i,'lefti', left,'righti', right);
-            console.log('nums[i]', nums[i], 'leftV', nums[left], 'Rvalue', nums[right]);
-            const sum = nums[i] + nums[left] + nums[right];
+		while (left < right) {
+			console.log("    ");
+			console.log("~~~~~~~    new while it   ~~~~~~~~");
+			console.log("i ------", i, "lefti", left, "righti", right);
+			console.log(
+				"nums[i]",
+				nums[i],
+				"leftV",
+				nums[left],
+				"Rvalue",
+				nums[right]
+			);
+			const sum = nums[i] + nums[left] + nums[right];
 
-            if (sum === 0) {
-                // Found a triplet with sum 0
-                console.log("push", [nums[i], nums[left], nums[right]]);
+			if (sum === 0) {
+				// Found a triplet with sum 0
+				console.log("push", [nums[i], nums[left], nums[right]]);
 
-                result.push([nums[i], nums[left], nums[right]]);
+				result.push([nums[i], nums[left], nums[right]]);
 
-                // Skip duplicate values for the second element
-                // i+1 < nums.length (IF i = len)&&
-                while (left < right && nums[left] === nums[left + 1]) {
-                    console.log(`WHILE new left`);
-                    left++;
-                }
+				// Skip duplicate values for the second element
+				// i+1 < nums.length (IF i = len)&&
+				while (left < right && nums[left] === nums[left + 1]) {
+					console.log(`WHILE new left`);
+					left++;
+				}
 
-                // Skip duplicate values for the third element
-                while (left < right && nums[right] === nums[right - 1]) {
-                    console.log(`WHILE new right`)
-                    right--;
-                }
+				// Skip duplicate values for the third element
+				while (left < right && nums[right] === nums[right - 1]) {
+					console.log(`WHILE new right`);
+					right--;
+				}
 
-                // Move pointers
-                console.log('CUR pointers L:', left, 'Right', right);
-                left++;
-                right--;
+				// Move pointers
+				console.log("CUR pointers L:", left, "Right", right);
+				left++;
+				right--;
 
-                console.log('end IF, new pointers left:', left, 'right', right);
-            } else if (sum < 0) {
-                // Move left pointer to increase the sum
-                left++;
-                console.log('sum < 0, left++, new left: ', left)
+				console.log("end IF, new pointers left:", left, "right", right);
+			} else if (sum < 0) {
+				// Move left pointer to increase the sum
+				left++;
+				console.log("sum < 0, left++, new left: ", left);
+			} else {
+				// Move right pointer to decrease the sum
+				right--;
+				console.log(", right--, new right: ", right);
+			}
+		}
+	}
 
-            } else {
-                // Move right pointer to decrease the sum
-                right--;
-                console.log(', right--, new right: ', right)
-            }
-        }
-    }
-
-    return result;
+	return result;
 };
 // to sort nums is the key, it allows you to move the pointer and do a pincer-like thing, while scanning for duplicates
 // sort will be a nlogn, but this will always be a nested loop sitch, so adding on a nlogn to n^2 doesn't add much
@@ -181,3 +185,4 @@ console.log(threeSum(nums1)); // Output: [[-1, -1, 2], [-1, 0, 1]]
 // console.log(threeSum(nums3)); // Output: [[0, 0, 0]]
 
 // console.log(threeSum([[-1,0,1,2,-1,-4]]));
+// adding lines
