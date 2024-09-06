@@ -54,7 +54,7 @@ class Sol:
             # Reverse the first k characters
             reversed_chunk = chunk[:k][::-1] + chunk[k:]
 
-            print(result, i, chunk, reversed_chunk)
+            # print(result, i, chunk, reversed_chunk)
             # Append the processed chunk to the result
             result.append(reversed_chunk)
 
