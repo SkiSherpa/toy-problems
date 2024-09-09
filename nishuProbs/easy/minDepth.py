@@ -19,11 +19,11 @@
 # The number of nodes in the tree is in the range [0, 10^5].
 # -1000 <= Node.val <= 1000
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 # dfs
 # IP: a root of bi tree
@@ -39,8 +39,9 @@
     # call right and left node with count
 # call helper with (root, 1)
 # return the count
+from typing import Optional
 class Solution:
-    def minDepth(self, root: ptional[TreeNode]) -> int:
+    def minDepth(self, root: Optional[TreeNode]) -> int:
         if root is None:
             return 0
 
