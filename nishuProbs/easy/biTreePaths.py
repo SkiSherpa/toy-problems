@@ -14,11 +14,11 @@
 # -100 <= Node.val <= 100
 
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 # IP: root of bi tree
 # OP: a list of paths to a leaf
 
@@ -31,8 +31,9 @@
 # If left exists
     # create a tempPath is root to start
     # add
+from typing import Optional
 class Solution:
-    def binaryTreePaths(self, root: optional[treeNode]) -> list[str]:
+    def binaryTreePaths(self, root: Optional[TreeNode]) -> list[str]:
         paths = []
         def dfs(node, path):
             if not node:
