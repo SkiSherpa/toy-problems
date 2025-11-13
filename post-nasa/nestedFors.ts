@@ -139,3 +139,45 @@ console.log(numsR.sort()[7] + numsR.sort()[6], largestSum(numsR));
 // Longest palindromic substring - Can use dynamic programming to optimize nested loops
 // Longest common subsequence (LCS) - DP classic that starts with nested loops
 // String pattern matching (naive vs KMP) - Shows dramatic improvement over nested loops
+
+// Longest Palindromic Substring
+// Given a string s, return the longest palindromic substring in s.
+// A palindrome is a string that reads the same forward and backward
+// 1 ≤ s.length ≤ 1000
+// s consists of only lowercase English letters
+
+// Input: s = "babad"
+// Output: "bab"
+// Explanation: "aba" is also a valid answer
+
+// Input: s = "cbbd"
+// Output: "bb"
+
+// Input: s = "racecar"
+// Output: "racecar"
+
+// ===================================================================================
+// Computational Geometry
+// ===================================================================================
+// Closest pair of points - Naive O(n²) vs divide-and-conquer O(n log n)
+// Convex hull - Various algorithms with different nested loop depths
+// Line segment intersection - Sweep line algorithms vs brute force
+
+// ===================================================================================
+// Classic Combinatorics
+// ===================================================================================
+// N-Queens problem - Backtracking with potentially deep nesting
+// Subset sum - Can compare nested loops vs DP vs backtracking
+// Generate all permutations/combinations - Understanding when deep nesting is necessary
+
+// ===================================================================================
+// Sorting
+// ===================================================================================
+// Bubble sort / Selection sort - Simple O(n²) nested loops
+// Counting inversions - Naive O(n²) vs merge sort approach
+
+// ===================================================================================
+
+// ===================================================================================
+
+// ===================================================================================
