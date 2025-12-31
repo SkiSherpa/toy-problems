@@ -83,7 +83,7 @@ function twoSum(nums: number[], target: number): number[] {
 	}
 	return [];
 }
-console.log(twoSum(nums12, target12), [2, 5]);
+// console.log(twoSum(nums12, target12), [2, 5]);
 
 // assuming arr is sorted.
 // split arr down middle, track two indexes,
@@ -124,11 +124,11 @@ function largestSum(nums: number[]): number {
 	return max1 + max2;
 }
 const numsLargest = [2, 7, 8, 10, 11, 15, 16, 19];
-console.log("largest sum", largestSum(numsLargest));
+// console.log("largest sum", largestSum(numsLargest));
 
 // Find the largest sum in the array, return the numbers
 const numsR = generateRandomArrayN(8);
-console.log(numsR.sort()[7] + numsR.sort()[6], largestSum(numsR));
+// console.log(numsR.sort()[7] + numsR.sort()[6], largestSum(numsR));
 
 // What is optimum for 3sum and 4sum
 // 	NOT A HASH MAP, SORTING + TWO POINTER is the best way.
@@ -149,12 +149,79 @@ console.log(numsR.sort()[7] + numsR.sort()[6], largestSum(numsR));
 // Input: s = "babad"
 // Output: "bab"
 // Explanation: "aba" is also a valid answer
-
+const s2 = "babad";
+const ans2 = "bab";
 // Input: s = "cbbd"
 // Output: "bb"
+const s3 = "racecar";
+const ans3 = "racecar";
 
-// Input: s = "racecar"
-// Output: "racecar"
+const s1 = "abcabba";
+const ans1 = "abba"; // this wouldnt work for inside out one at a time
+// Have a pointer to expand out from, tracking the letters on the Left & Right
+// Track the current longest string
+// Replace if a longer one is found
+const longestPalindrome = function (s: string) {
+	if (s.length === 0) {
+		return "";
+	}
+	if (s.length === 1) {
+		return s;
+	}
+
+	let longest = "";
+	// loop through s - Works for evens
+	if (s.length % 2 === 0) {
+		for (let i = 0; i < s.length; i++) {
+			let curLongest = "";
+			let L = i;
+			let R = i + 1;
+			// console.log("outer loop hit");
+			// loop outward from i
+			while (L > 0 && R < s.length) {
+				console.log(L, R);
+				console.log("L=", s[L], "  R=", s[R], curLongest);
+				// IF the two letters are the same, set curLongest
+				if (s[L] === s[R]) {
+					curLongest = s[L] + curLongest + s[R];
+				}
+				L--;
+				R++;
+			}
+			// compare the length of longest to curLongest
+			if (longest.length < curLongest.length) {
+				longest = curLongest;
+			}
+		}
+	} else {
+		for (let i = 0; i < s.length; i++) {
+			let curLongest = s[i];
+			let L = i - 1;
+			let R = i + 1;
+			// console.log("ODD outer loop hit");
+			// loop outward from i
+			while (L >= 0 && R < s.length) {
+				console.log(L, R);
+				console.log("L=", s[L], "  R=", s[R], curLongest);
+				// IF the two letters are the same, set curLongest
+				if (s[L] === s[R]) {
+					curLongest = s[L] + curLongest + s[R];
+				}
+				L--;
+				R++;
+			}
+			// compare the length of longest to curLongest
+			if (longest.length < curLongest.length) {
+				longest = curLongest;
+			}
+		}
+	}
+
+	return longest;
+};
+console.log(longestPalindrome(s1), ans1);
+// console.log(longestPalindrome(s2), ans2);
+// console.log(longestPalindrome(s3), ans3);
 
 // ===================================================================================
 // Computational Geometry
