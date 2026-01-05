@@ -1,10 +1,5 @@
 import { GameState, Grid } from "./types";
-import {
-	createEmptyGrid,
-	copyGrid,
-	setCell as setGridCell,
-	randomizeGrid,
-} from "./grid";
+import { createEmptyGrid, copyGrid, setGridCell, randomizeGrid } from "./grid";
 import { computeNextGeneration } from "./rules";
 
 export function createGame(

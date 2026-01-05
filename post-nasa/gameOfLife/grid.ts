@@ -10,7 +10,7 @@ export function copyGrid(grid: Grid): Grid {
 	return grid.map((row) => [...row]);
 }
 
-export function setCell(
+export function setGridCell(
 	grid: Grid,
 	row: number,
 	col: number,
